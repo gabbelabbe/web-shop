@@ -1,5 +1,5 @@
 import { Link, useHistory } from "react-router-dom"
-import HomeSVG from '../shared/images/home-white-18dp.svg'
+import HomeSVG from '../../shared/images/home-white-18dp.svg'
 
 export const Header = () => {
   const history = useHistory()

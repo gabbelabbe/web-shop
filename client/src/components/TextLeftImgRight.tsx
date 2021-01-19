@@ -7,7 +7,7 @@ export const TextLeftImgRight = ({ img, text, title }: SplitViewProps) => {
         {title ? <h2>{title}</h2> : null}
         {text ? <p>{text}</p> : null}
       </div>
-      <img src={img}></img>
+      <img src={img} alt="img"></img>
     </div>
   )
 }
