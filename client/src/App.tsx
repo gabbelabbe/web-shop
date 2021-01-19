@@ -1,12 +1,14 @@
 import React from 'react'
-import { Home } from './views/home'
-import { Header } from './components/header'
-import { About } from './views/about'
+import { Home } from './pages/Home'
+import { Header } from './components/Header'
+import { About } from './pages/About'
+import { Footer } from './components/Footer'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
+import './shared/styles/style.css'
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Home />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   )
 }
