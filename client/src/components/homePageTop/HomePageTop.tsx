@@ -1,3 +1,5 @@
+import './HomePageTop.css'
+
 export const HomePageTop = () => {
   return (
     <div className='homePageTop'>

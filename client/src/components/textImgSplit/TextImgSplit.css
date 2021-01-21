@@ -1,0 +1,23 @@
+.textImgSplit {
+  display: flex;
+}
+
+.textImgSplit div {
+  width: 50%;
+  display: flex;
+  margin: 0 1rem;
+  flex-direction: column;
+}
+
+.textImgSplit div h2 {
+  align-self: center;
+}
+
+.textImgSplit div p {
+  font-size: 1.25rem;
+}
+
+.textImgSplit img {
+  max-width: 50%;
+  margin-left: auto;
+}
