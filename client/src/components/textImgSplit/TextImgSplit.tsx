@@ -1,7 +1,7 @@
-import { SplitViewProps } from '../../shared/interface/props'
+import { iSplitViewProps } from '../../shared/interface/props'
 import './TextImgSplit.css'
 
-export const TextImgSplit = ({ img, text, title, reverse }: SplitViewProps) => {
+export const TextImgSplit = ({ img, text, title, reverse }: iSplitViewProps) => {
   return (
     <div className='textImgSplit' style={{flexDirection: (reverse ? 'row-reverse' : 'row')}}>
       <div>

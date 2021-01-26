@@ -1,4 +1,4 @@
-export interface loginCredentials {
-  userName: string,
+export interface iloginCredentials {
+  username: string,
   password: string
 }

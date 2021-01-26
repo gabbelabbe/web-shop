@@ -1,0 +1,12 @@
+.profileDiv {
+  display: flex;
+  align-items: center;
+}
+
+.profileImg {
+  max-height: 3rem;
+}
+
+.profileDiv p {
+  margin-left: 0.5em;
+}
