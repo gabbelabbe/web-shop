@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+}
+
+.svgs {
+  height: 2rem;
+  cursor: pointer;
+}
+
+.contentContainer {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  background-color: #000;
+  right: 0;
+  top: 3.8rem;
+  border-radius: 10px;
+  align-items: flex-end;
+  padding: 5px;
+}
