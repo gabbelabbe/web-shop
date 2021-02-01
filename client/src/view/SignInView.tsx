@@ -9,7 +9,7 @@ export const SignInView = () => {
   return (
     <>
       {
-        location.pathname == RoutingPath.signInView ? <SignIn /> : <SignUp />
+        location.pathname === RoutingPath.signInView ? <SignIn /> : <SignUp />
       }
     </>
   )

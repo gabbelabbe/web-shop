@@ -18,22 +18,6 @@
   font-size: 1rem;
 }
 
-.showPwd {
-  background-image: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbUF8ijoIW-ZFNk-M-KT-J3uUAfl6bNrkTWPcr3tw1HMjqVoFAFcoKRTk);
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-  vertical-align: middle;
-}
-
-.hidePwd {
-  background-image: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbUF8ijoIW-ZFNk-M-KT-J3uUAfl6bNrkTWPcr3tw1HMjqVoFAFcoKRTk);
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-  vertical-align: middle;
-}
-
 .signInInput:focus {
   border-color: #1B89FA;
 }

@@ -9,7 +9,7 @@ import './MobileHeader.css'
 
 export const MobileHeader = () => {
   const history = useHistory()
-  const [authUser, setAuthUser] = useContext(UserContext)
+  const [authUser] = useContext(UserContext)
   const [showMenu, setShowMenu] = useState(false)
 
   return (

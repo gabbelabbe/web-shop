@@ -8,9 +8,9 @@ import './SignIn.css'
 export const SignIn = () => {
   const history = useHistory()
   const [loginCredentials, setLoginCredentials] = useState<iloginCredentials>({username: '', password: ''})
-  const [authUser, setAuthUser] = useContext(UserContext)
+  const [, setAuthUser] = useContext(UserContext)
   const [disabled, setDisabled] = useState(true)
-  const [showPwd, setShowPwd] = useState(false)
+  const [showPwd] = useState(false)
 
   const handleSignIn = () => {
     if (loginCredentials.username  && loginCredentials.password) {

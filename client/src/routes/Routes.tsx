@@ -16,6 +16,7 @@ const Routes = () => {
     if(!authUser && localStorage.getItem('user')) {
       setAuthUser(JSON.parse(localStorage.getItem('user')!))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

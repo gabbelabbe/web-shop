@@ -8,7 +8,7 @@ import { UserContext } from '../../../shared/provider/UserProvider'
 
 export const DesktopHeader = () => {
   const history = useHistory()
-  const [authUser, setAuthUser] = useContext(UserContext)
+  const [authUser] = useContext(UserContext)
 
   return (
     <header className='header'>

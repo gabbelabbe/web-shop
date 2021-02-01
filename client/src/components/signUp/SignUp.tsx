@@ -8,7 +8,7 @@ import './SignUp.css'
 export const SignUp = () => {
   const history = useHistory()
   const [loginCredentials, setLoginCredentials] = useState<iloginCredentials>({username: '', email: '', password: ''})
-  const [authUser, setAuthUser] = useContext(UserContext)
+  const [, setAuthUser] = useContext(UserContext)
   const [disabled, setDisabled] = useState(true)
 
   const handleSignUp = () => {
