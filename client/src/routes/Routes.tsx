@@ -7,13 +7,15 @@ import { Home } from "../view/Home"
 import { SignInView } from "../view/SignInView"
 import RoutingPaths from './RoutingPath'
 import { UserContext } from '../shared/provider/UserProvider'
+import { Profile } from '../view/Profile'
 
 const Routes = () => {
   const [authUser, setAuthUser] = useContext(UserContext)
 
   useEffect(() => {
-    if(!authUser && localStorage.getItem('user'))
-      setAuthUser({username: localStorage.getItem('user')})
+    if(!authUser && localStorage.getItem('user')) {
+      setAuthUser(JSON.parse(localStorage.getItem('user')!))
+    }
   }, [])
 
   return (
@@ -21,7 +23,8 @@ const Routes = () => {
       <Header />
       <Switch>
         <Route exact path={RoutingPaths.aboutView} component={About} />
-        <Route exact path={RoutingPaths.signInView} component={SignInView} />
+        <Route exact path={[RoutingPaths.signInView, RoutingPaths.signUpView]} component={SignInView} />
+        <Route exact path={RoutingPaths.profileView} component={Profile} />
         <Route component={Home} />
       </Switch>
       <Footer />

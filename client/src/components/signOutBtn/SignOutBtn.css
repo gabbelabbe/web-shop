@@ -1,0 +1,17 @@
+.signOutBtn {
+  width: 100px;
+  margin: auto 2rem 2rem ;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: 200ms;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: white;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.signOutBtn:hover {
+  background-color: #AD2117;
+}

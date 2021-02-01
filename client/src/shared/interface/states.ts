@@ -1,6 +1,7 @@
 export interface iloginCredentials {
-  username: string,
-  password: string
+  username?: string,
+  email?: string,
+  password?: string,
 }
 
 export interface iuseWindowReszie {

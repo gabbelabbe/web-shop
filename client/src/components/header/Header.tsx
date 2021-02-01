@@ -4,7 +4,7 @@ import './Header.css'
 import { MobileHeader } from './mobileHeader/MobileHeader';
 
 export const Header = () => {
-  const {width, height} = useWindowSize();
+  const {width} = useWindowSize();
 
   return (
     <>

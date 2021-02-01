@@ -21,7 +21,7 @@ export const MobileHeader = () => {
         <Link to='/news'>News</Link>
         <Link to={RoutingPath.aboutView}>About</Link>
         <Link to='/guidelines'>Guidelines</Link>
-        {authUser ? <Link to='/profile'>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
+        {authUser ? <Link to={RoutingPath.profileView}>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
         <img src={CartSVG} alt='Cart Button' onClick={() => history.push('/cart')} className='svgs' />
       </div>
     </header>

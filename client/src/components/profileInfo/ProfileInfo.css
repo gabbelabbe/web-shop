@@ -1,0 +1,6 @@
+.profileInfoContainer {
+  display: flex;
+  width: 40%;
+  padding-left: 10%;
+  margin-top: 50px;
+}

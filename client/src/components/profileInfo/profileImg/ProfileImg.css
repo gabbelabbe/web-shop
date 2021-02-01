@@ -4,9 +4,6 @@
 }
 
 .profileImg {
-  max-height: 3rem;
-}
-
-.profileDiv p {
-  margin-left: 0.5em;
+  max-height: 6rem;
+  border-radius: 6rem;
 }

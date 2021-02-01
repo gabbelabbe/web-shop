@@ -1,0 +1,68 @@
+.signInForm {
+  margin-bottom: auto;
+  margin-top: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 2rem;
+  border-style: solid;
+}
+
+.signInInput {
+  margin-bottom: 10px;
+  outline: none;
+  border-width: 0 0 2px;
+  border-color: #000;
+  transition: 200ms;
+  font-size: 1rem;
+}
+
+.showPwd {
+  background-image: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbUF8ijoIW-ZFNk-M-KT-J3uUAfl6bNrkTWPcr3tw1HMjqVoFAFcoKRTk);
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  vertical-align: middle;
+}
+
+.hidePwd {
+  background-image: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSbUF8ijoIW-ZFNk-M-KT-J3uUAfl6bNrkTWPcr3tw1HMjqVoFAFcoKRTk);
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  vertical-align: middle;
+}
+
+.signInInput:focus {
+  border-color: #1B89FA;
+}
+
+.btn {
+  width: 100px;
+  cursor: pointer;
+  transition: 200ms;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: white;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  background-color: #1B89FA;
+  color: white;
+}
+
+.btn:disabled {
+  cursor: default;
+  color: #000;
+  background-color: grey;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
