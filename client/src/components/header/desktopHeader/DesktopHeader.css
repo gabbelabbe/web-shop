@@ -14,6 +14,7 @@
 .svgs {
   height: 2rem;
   cursor: pointer;
+  margin: 0.5rem;
 }
 
 .header a {

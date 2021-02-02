@@ -8,6 +8,8 @@ import { SignInView } from "../view/SignInView"
 import RoutingPaths from './RoutingPath'
 import { UserContext } from '../shared/provider/UserProvider'
 import { Profile } from '../view/Profile'
+import { Products } from '../view/Products'
+import { Cart } from '../view/Cart'
 
 const Routes = () => {
   const [authUser, setAuthUser] = useContext(UserContext)
@@ -26,6 +28,8 @@ const Routes = () => {
         <Route exact path={RoutingPaths.aboutView} component={About} />
         <Route exact path={[RoutingPaths.signInView, RoutingPaths.signUpView]} component={SignInView} />
         <Route exact path={RoutingPaths.profileView} component={Profile} />
+        <Route exact path={RoutingPaths.productView} component={Products} />
+        <Route exact path={RoutingPaths.cartView} component={Cart} />
         <Route component={Home} />
       </Switch>
       <Footer />

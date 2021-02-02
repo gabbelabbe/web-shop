@@ -28,3 +28,13 @@ a, p, h1, h2, h3, h4, h5, h6, div, button {
 .homePage {
   margin: 20px;
 }
+
+* {
+  transition: 200ms;
+}
+
+.productsContainer {
+  display: flex;
+  width: calc(100% - 4rem);
+  margin: 2rem;
+}

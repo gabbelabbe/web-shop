@@ -11,18 +11,23 @@ export const MobileHeader = () => {
   const history = useHistory()
   const [authUser] = useContext(UserContext)
   const [showMenu, setShowMenu] = useState(false)
+  
+  const closeMenuOnNewUrl = (url: string) => {
+    history.push(url)
+    setShowMenu(false)
+  }
 
   return (
     <header className='header'>
       <img src={HomeSVG} alt="Home Button" onClick={() => history.push(RoutingPath.homeView)} className='svgs' />
       <img src={HamSVG} alt="Menu button" className='svgs' style={{marginLeft: 'auto'}} onClick={() => setShowMenu(!showMenu)} />
-      <div className='contentContainer' style={{display: showMenu ? 'flex' : ''}}>
-        <Link to='/products'>Products</Link>
-        <Link to='/news'>News</Link>
-        <Link to={RoutingPath.aboutView}>About</Link>
-        <Link to='/guidelines'>Guidelines</Link>
-        {authUser ? <Link to={RoutingPath.profileView}>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
-        <img src={CartSVG} alt='Cart Button' onClick={() => history.push('/cart')} className='svgs' />
+      <div className={showMenu ? 'contentContainer open' : 'contentContainer'}>
+        <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.productView)}>Products</span>
+        <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.newsView)}>News</span>
+        <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.aboutView)}>About</span>
+        <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.guidelinesView)}>Guidelines</span>
+        {authUser ? <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.profileView)}>{authUser.username}</span> : <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.signInView)}>Sign In</span>}
+        <img src={CartSVG} alt='Cart Button' onClick={() => closeMenuOnNewUrl(RoutingPath.cartView)} className='svgs' />
       </div>
     </header>
   )

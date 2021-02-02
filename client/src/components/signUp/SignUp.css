@@ -1,0 +1,56 @@
+.signInForm {
+  margin-bottom: auto;
+  margin-top: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 2rem;
+  border-style: solid;
+}
+
+.signInInput {
+  margin-bottom: 10px;
+  outline: none;
+  border-width: 0 0 2px;
+  border-color: #000;
+  font-size: 1rem;
+}
+
+.signInInput:focus {
+  border-color: #1B89FA;
+}
+
+.btn {
+  width: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: white;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  background-color: #1B89FA;
+  color: white;
+}
+
+.btn:disabled {
+  cursor: default;
+  color: #000;
+  background-color: grey;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .signInForm {
+    width: 50%;
+  }
+}

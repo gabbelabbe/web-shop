@@ -13,12 +13,12 @@ export const DesktopHeader = () => {
   return (
     <header className='header'>
       <img src={HomeSVG} alt="Home Button" onClick={() => history.push(RoutingPath.homeView)} className='svgs'></img>
-      <Link to='/prodducts' style={{marginLeft: 'auto'}}>Products</Link>
-      <Link to='/news'>News</Link>
+      <Link to={RoutingPath.productView} style={{marginLeft: 'auto'}}>Products</Link>
+      <Link to={RoutingPath.newsView}>News</Link>
       <Link to={RoutingPath.aboutView}>About</Link>
-      <Link to='/guidelines'>Guidelines</Link>
+      <Link to={RoutingPath.guidelinesView}>Guidelines</Link>
       {authUser ? <Link to={RoutingPath.profileView}>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
-      <img src={CartSVG} alt='Cart Button' onClick={() => history.push('/cart')} className='svgs' />
+      <img src={CartSVG} alt='Cart Button' onClick={() => history.push(RoutingPath.cartView)} className='svgs' />
     </header>
   )
 }
