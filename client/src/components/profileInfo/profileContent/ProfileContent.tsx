@@ -8,6 +8,7 @@ export const ProfileContent = () => {
   return (
     <div className='profileContentContainer'>
       <h2>{authUser? authUser.username : 'Ditt Namn'}</h2>
+      <h2>{authUser? authUser.email : 'Din Mail'}</h2>
     </div>
   )
 }

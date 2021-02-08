@@ -2,4 +2,9 @@
   display: flex;
   flex-direction: column;
   margin-left: 5%;
+  justify-content: center;
+}
+
+.profileContentContainer h2 {
+  margin: 0.2em 0;
 }
