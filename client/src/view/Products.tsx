@@ -1,6 +1,5 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { useHistory } from "react-router-dom"
-import { getMoreInfo, getPerson } from "../shared/api/apiHandler"
 import { iStarWarsCharacters } from "../shared/interface/states"
 import { StarWarsContext } from '../shared/provider/StarWarsProvider'
 import RoutingPaths from '../routes/RoutingPath'
@@ -35,36 +34,7 @@ export const Products = () => {
   }]) */
 
   const history = useHistory()
-  const [starWarsCharacters, setStarWarsCharacters] = useContext(StarWarsContext) as [iStarWarsCharacters[], React.Dispatch<React.SetStateAction<iStarWarsCharacters[]>>]
-
-  useEffect(() => {
-    const fetchPeople = async () => {
-      const temp: iStarWarsCharacters[] = []
-      for (let i = 1; i < 84; i++) {
-        let person = await getPerson(i)
-        if (person) {
-          person.homeworld = person.homeworld.split('http')[0] ? person.homeworld : 'https' + person.homeworld.split('http')[1]
-          const homeWorld = await getMoreInfo(person.homeworld)
-          person.homeworld = homeWorld
-          const movies = []
-          for (let i = 0; i < person.films.length; i++) {
-            person.films[i] = person.films[i].split('http')[0] ? person.films[i] : 'https' + person.films[i].split('http')[1]
-            const movie = await getMoreInfo(person.films[i])
-            movies.push(movie)
-          }
-          person.films = movies
-          person.id = i
-          temp.push(person)
-        }
-      }
-      setStarWarsCharacters(temp)
-    }
-
-    if (!starWarsCharacters.length)
-      fetchPeople()
-    
-    // eslint-disable-next-line
-  }, [])
+  const [starWarsCharacters, ] = useContext(StarWarsContext) as [iStarWarsCharacters[], React.Dispatch<React.SetStateAction<iStarWarsCharacters[]>>]
 
   return (
     <div className='productsContainer'>
