@@ -43,10 +43,12 @@ export const Products = () => {
       for (let i = 1; i < 84; i++) {
         let person = await getPerson(i)
         if (person) {
+          person.homeworld = person.homeworld.split('http')[0] ? person.homeworld : 'https' + person.homeworld.split('http')[1]
           const homeWorld = await getMoreInfo(person.homeworld)
           person.homeworld = homeWorld
           const movies = []
           for (let i = 0; i < person.films.length; i++) {
+            person.films[i] = person.films[i].split('http')[0] ? person.films[i] : 'https' + person.films[i].split('http')[1]
             const movie = await getMoreInfo(person.films[i])
             movies.push(movie)
           }
