@@ -1,9 +1,14 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import { ProductCard } from "../components/productCard/ProductCard"
+import { getMoreInfo, getPerson } from "../shared/api/apiHandler"
 import { iProduct } from "../shared/interface/props"
+import { iStarWarsCharacters } from "../shared/interface/states"
+import { StarWarsContext } from '../shared/provider/StarWarsProvider'
+import RoutingPaths from '../routes/RoutingPath'
 
 export const Products = () => {
-  const [products, setProducts] = useState<iProduct[]>([{
+  /* const [products, setProducts] = useState<iProduct[]>([{
     id: 'asdasfdsfgdfh', 
     imgs: [
       'https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 
@@ -29,11 +34,62 @@ export const Products = () => {
     title: '', 
     type: '', 
     text: ''
-  }])
+  }]) */
+
+  const history = useHistory()
+  const [starWarsCharacters, setStarWarsCharacters] = useContext(StarWarsContext) as [iStarWarsCharacters[], React.Dispatch<React.SetStateAction<iStarWarsCharacters[]>>]
+
+  useEffect(() => {
+    const fetchPeople = async () => {
+      const temp: iStarWarsCharacters[] = []
+      for (let i = 1; i < 84; i++) {
+        let person = await getPerson(i)
+        if (person) {
+          const homeWorld = await getMoreInfo(person.homeworld)
+          person.homeworld = homeWorld
+          const movies = []
+          for (let i = 0; i < person.films.length; i++) {
+            const movie = await getMoreInfo(person.films[i])
+            movies.push(movie)
+          }
+          person.films = movies
+          person.id = i
+          temp.push(person)
+        }
+      }
+      setStarWarsCharacters(temp)
+    }
+
+    if (!starWarsCharacters.length)
+      fetchPeople()
+  }, [])
 
   return (
     <div className='productsContainer'>
       {
+        starWarsCharacters.length ? 
+        starWarsCharacters.map((person) => {
+          return (
+            <div className='starWarsCard' key={person.id} onClick={() => history.push(RoutingPaths.productView + '/' + person.id)}>
+              <h3>Name: {person.name}</h3>
+              <p>Brith year: {person.birth_year}</p>
+              <p>Home world: {person.homeworld.name}</p>
+              <p>Height: {person.height}cm</p>
+              <p>Appears in:</p>
+              <ul>
+                {
+                  person.films.map((movie) => {
+                    return (
+                      <li>{movie.title}</li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          )
+        }) : <h1>Loading!</h1>
+      }
+      {/* {
         products.map((product) => 
           <ProductCard 
             imgs={product.imgs} 
@@ -43,7 +99,7 @@ export const Products = () => {
             id={product.id}
           />
         )
-      }
+      } */}
     </div>
   )
 }

@@ -5,7 +5,7 @@ export interface iSplitViewProps {
   reverse?: boolean
 }
 
-export interface iAuthUser {
+export interface iProvider {
   children: React.ReactChild
 }
 
