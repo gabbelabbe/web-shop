@@ -1,8 +1,6 @@
-import { useState, useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import { ProductCard } from "../components/productCard/ProductCard"
 import { getMoreInfo, getPerson } from "../shared/api/apiHandler"
-import { iProduct } from "../shared/interface/props"
 import { iStarWarsCharacters } from "../shared/interface/states"
 import { StarWarsContext } from '../shared/provider/StarWarsProvider'
 import RoutingPaths from '../routes/RoutingPath'
@@ -62,6 +60,8 @@ export const Products = () => {
 
     if (!starWarsCharacters.length)
       fetchPeople()
+    
+    // eslint-disable-next-line
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { useHistory, Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import RoutingPath from "../../../routes/RoutingPath"
 import { UserContext } from "../../../shared/provider/UserProvider"
 import HomeSVG from '../../../shared/images/home-white-18dp.svg'

@@ -42,6 +42,7 @@ export const Product = ({ match }: {match: MatchProps }) => {
   
       fetchPeople()
     }
+    // eslint-disable-next-line
   }, [starWarsCharacters])
 
   return (
