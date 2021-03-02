@@ -1,0 +1,32 @@
+.adminButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  height: 57.5px;
+  align-items: center;
+}
+
+.adminViewButton {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: grey;
+  color: white;
+  width: 150px;
+  margin: 0 1rem;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 1.25rem;
+  transition: 400ms;
+}
+
+.adminViewButton:hover {
+  background-color: black;
+  width: 172.5px;
+  height: 57.5px;
+  font-size: 1.4375rem;
+}
+
+.selected {
+  background-color: #1B89FA!important;
+}

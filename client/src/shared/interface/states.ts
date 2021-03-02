@@ -17,3 +17,10 @@ export interface iStarWarsCharacters {
   height: string,
   id: number
 }
+
+export interface iProduct {
+  name?: string,
+  types?: string[],
+  price?: number,
+  quantity?: number
+}

@@ -17,6 +17,7 @@ export const DesktopHeader = () => {
       <Link to={RoutingPath.newsView}>News</Link>
       <Link to={RoutingPath.aboutView}>About</Link>
       <Link to={RoutingPath.guidelinesView}>Guidelines</Link>
+      {authUser && authUser.userType === 'admin' ? <Link to={RoutingPath.adminView}>Admin</Link> : null}
       {authUser ? <Link to={RoutingPath.profileView}>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
       <img src={CartSVG} alt='Cart Button' onClick={() => history.push(RoutingPath.cartView)} className='svgs' />
     </header>

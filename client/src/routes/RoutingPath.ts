@@ -7,6 +7,7 @@ const productView = '/products'
 const newsView = '/news'
 const guidelinesView = '/guidelines'
 const cartView = '/cart'
+const adminView = '/admin'
 
 const routes = {
   homeView,
@@ -17,7 +18,8 @@ const routes = {
   productView,
   newsView,
   guidelinesView,
-  cartView
+  cartView,
+  adminView
 }
 
 export default routes

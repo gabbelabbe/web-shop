@@ -27,6 +27,7 @@ export const MobileHeader = () => {
         <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.aboutView)}>About</span>
         <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.guidelinesView)}>Guidelines</span>
         {authUser ? <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.profileView)}>{authUser.username}</span> : <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.signInView)}>Sign In</span>}
+        {authUser && authUser.userType === 'admin' ? <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.adminView)}>Admin</span> : null}
         <img src={CartSVG} alt='Cart Button' onClick={() => closeMenuOnNewUrl(RoutingPath.cartView)} className='svgs' />
       </div>
     </header>

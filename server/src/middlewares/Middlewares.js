@@ -18,7 +18,16 @@ const errHandler = (error, req, res, next) => {
   })
 }
 
+const isAdmin = (req, res, next) => {
+  if (req.body.userType === 'admin') {
+    next()
+  } else {
+    res.status(401).send('You are not admin >:(')
+  }
+}
+
 export default {
   notFound,
-  errHandler
+  errHandler,
+  isAdmin
 }

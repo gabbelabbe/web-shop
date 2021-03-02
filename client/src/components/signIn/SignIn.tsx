@@ -6,6 +6,7 @@ import { UserContext } from '../../shared/provider/UserProvider'
 import Eye from '../../shared/images/visibility-black-18dp.svg'
 import EyeCrossed from '../../shared/images/visibility_off-black-18dp.svg'
 import './SignIn.css'
+import { signIn } from '../../shared/api/apiHandler'
 
 export const SignIn = () => {
   const history = useHistory()
@@ -14,11 +15,14 @@ export const SignIn = () => {
   const [disabled, setDisabled] = useState(true)
   const [showPwd, setShowPwd] = useState(false)
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     if (loginCredentials.username  && loginCredentials.password) {
-      localStorage.setItem('user', JSON.stringify({username: loginCredentials.username}))
-      setAuthUser(loginCredentials)
-      history.push(RoutingPath.homeView)
+      const response = await signIn(loginCredentials.username, loginCredentials.password)
+      if (response && response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
+        setAuthUser(response.data)
+        history.push(RoutingPath.homeView)
+      }
     }
   }
 
