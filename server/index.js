@@ -15,7 +15,7 @@ app.use(morgan('common'))
 app.use(express.json())
 const corsOptions = {
   credentials: true,
-  origin: process.env.CLIENT_URL, // Update to application url on launch
+  origin: '*', // Update to application url on launch
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
