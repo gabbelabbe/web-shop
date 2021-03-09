@@ -2,7 +2,7 @@ import Chai from 'chai'
 import ChaiHTTP from 'chai-http'
 import pkg from 'mocha'
 const { describe, it: test } = pkg
-import { app } from '../index.mjs'
+import { app } from '../index.js'
 
 Chai.should()
 Chai.use(ChaiHTTP)
