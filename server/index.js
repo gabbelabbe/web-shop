@@ -33,4 +33,4 @@ app.use(Middlewares.errHandler)
 Configurations.connectToDb()
 Configurations.connectToPort(app)
 
-export default app
+export { app }
