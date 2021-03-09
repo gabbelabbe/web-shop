@@ -1,8 +1,8 @@
 import Axios from 'axios'
-import { iStarWarsCharacters } from '../interface/states'
+import { iProduct, iStarWarsCharacters } from '../interface/states'
 
 const baseStarWarsUrl = 'https://swapi.dev/api/'
-const baseUrl = 'http://localhost:3001/'
+const baseUrl = process.env.REACT_APP_SERVER_BASE_URL
 
 export const getPerson = (id: number | string): Promise<iStarWarsCharacters> => {
   return Axios.get(baseStarWarsUrl + 'people/' + id + '/')
@@ -30,6 +30,24 @@ export const signIn = (username: string, password: string) => {
 
 export const getAllUsers = () => {
   return Axios.get(baseUrl + 'users')
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const getAllProducts = () => {
+  return Axios.get(baseUrl + 'products')
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const createProduct = (productInfo: iProduct) => {
+  return Axios.post(baseUrl + 'product', {...productInfo})
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const deleteProduct = (_id: string) => {
+  return Axios.delete(baseUrl + 'product', { data: {_id: _id} })
     .then(res => res)
     .catch(err => console.error(err))
 }

@@ -84,6 +84,18 @@ const changePrice = async (req, res) => {
   }
 }
 
+const updateProduct = async (req, res) => {
+  try {
+    const dbRes = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { price: req.body.price, quantity: req.body.quantity, name: req.body.name, types: req.body.types })
+    res.status(200).send(dbRes)
+  } catch (err) {
+    res.status(500).send({
+      msg: 'Error while trying to update quality.',
+      stack: err
+    })
+  }
+}
+
 const queryProduct = async (req, res) => {
   try {
     const dbRes = await ProductModel.find({ name: { $regex: req.query.name } })
@@ -103,5 +115,6 @@ export default {
   deleteProduct,
   changeQuantity,
   changePrice,
-  queryProduct
+  queryProduct,
+  updateProduct
 }

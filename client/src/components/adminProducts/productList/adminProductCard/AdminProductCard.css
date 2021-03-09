@@ -1,0 +1,48 @@
+.adminProductCard {
+  margin: 1.5rem;
+  border-style: solid;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.adminProductCard ul {
+  padding: 0;
+  padding-left: 1.5rem;
+  margin: 0.5em 0;
+}
+
+.adminProductCard h5 {
+  margin: 0.5em 0;
+}
+
+.adminProductCard h3 {
+  margin: 0.5em 0;
+}
+
+.adminIcon {
+  margin: 0.25rem;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: black;
+}
+
+.edit {
+  margin-left: auto;
+}
+
+.edit:hover {
+  background-color: #1B89FA;
+}
+
+.delete:hover {
+  background-color: #AD2117;
+}
+
+.iconContainer {
+  display: flex;
+  margin-top: auto;
+}

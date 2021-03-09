@@ -2,6 +2,9 @@ export interface iloginCredentials {
   username?: string,
   email?: string,
   password?: string,
+  _id?: string,
+  address?: string,
+  userType?: string
 }
 
 export interface iuseWindowReszie {
@@ -22,5 +25,6 @@ export interface iProduct {
   name?: string,
   types?: string[],
   price?: number,
-  quantity?: number
+  quantity?: number,
+  _id?: string
 }

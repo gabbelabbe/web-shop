@@ -32,3 +32,5 @@ app.use(Middlewares.errHandler)
 // Connect to mongo and start server
 Configurations.connectToDb()
 Configurations.connectToPort(app)
+
+export default app

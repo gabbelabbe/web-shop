@@ -12,13 +12,15 @@ import { Products } from '../view/Products'
 import { Cart } from '../view/Cart'
 import { Product } from '../view/Product'
 import { StarWarsContext } from '../shared/provider/StarWarsProvider'
-import { getMoreInfo, getPerson } from "../shared/api/apiHandler"
+import { ProductsContext } from '../shared/provider/ProductsProvider'
+import { getMoreInfo, getPerson, getAllProducts } from "../shared/api/apiHandler"
 import { iStarWarsCharacters } from "../shared/interface/states"
 import { Admin } from '../view/admin/Admin'
 
 const Routes = () => {
   const [authUser, setAuthUser] = useContext(UserContext)
   const [starWarsCharacters, setStarWarsCharacters] = useContext(StarWarsContext) as [iStarWarsCharacters[], React.Dispatch<React.SetStateAction<iStarWarsCharacters[]>>]
+  const [products, setProducts] = useContext(ProductsContext)
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -52,6 +54,18 @@ const Routes = () => {
     
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const temp = await getAllProducts()
+      if (temp && temp.data)
+        setProducts(temp.data)
+    }
+
+    if (!products.length)
+      fetchProducts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authUser])
 
   useEffect(() => {
     if(!authUser && localStorage.getItem('user')) {

@@ -4,6 +4,7 @@ import { AdminProducts } from "../../components/adminProducts/AdminProducts"
 import { getAllUsers } from "../../shared/api/apiHandler"
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import './Admin.css'
+import { AdminUserList } from "../../components/adminUserList/AdminUserList"
 
 export const Admin = () => {
   const [users, setUsers] = useState([])
@@ -33,7 +34,7 @@ export const Admin = () => {
             }
 
             {
-              view === 'users' ? <h1>Groups</h1> : null
+              view === 'users' ? <AdminUserList users={users} /> : null
             }
 
             {

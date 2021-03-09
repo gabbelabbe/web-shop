@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { createProduct } from '../../../shared/api/apiHandler'
 import { iProduct } from '../../../shared/interface/states'
 import './CreateProductForm.css'
+import { ProductsContext } from '../../../shared/provider/ProductsProvider'
 
-export const CreateProductForm = () => {
+export const CreateProductForm = (
+  { selectedProduct, setSelectedProduct }: 
+  { selectedProduct: iProduct | undefined, setSelectedProduct: React.Dispatch<React.SetStateAction<iProduct | undefined>>}
+) => {
   const [productInfo, setProductInfo] = useState<iProduct>({name: '', types: [], price: 0, quantity: 0})
+  const [products, setProducts] = useContext(ProductsContext) as [iProduct[], React.Dispatch<React.SetStateAction<iProduct[]>>]
 
   const handleChange = (newState: iProduct) => {
     setProductInfo({...productInfo, ...newState})
@@ -11,7 +17,21 @@ export const CreateProductForm = () => {
 
   const handleClear = () => {
     setProductInfo({name: '', types: [], price: 0, quantity: 0})
+    setSelectedProduct(undefined)
   }
+
+  const handleCreateProduct = async () => {
+    const res = await createProduct(productInfo)
+    if (res && res.status === 201) {
+      setProducts([...products, res.data])
+      handleClear()
+    }
+  }
+
+  useEffect(() => {
+    if (selectedProduct)
+      setProductInfo(selectedProduct)
+  }, [selectedProduct])
 
   return (
     <div className='productForm'>
@@ -27,12 +47,17 @@ export const CreateProductForm = () => {
         value={productInfo.name}
       />
 
-      {/* <input 
-        type="checkbox" 
-        name="" 
-        id=""
-        onChange={event => handleChange({username: event.target.value})} 
-      /> */}
+      <label htmlFor="types">
+        Product Types
+      </label>
+      <input 
+        type="text" 
+        name="types" 
+        id="types" 
+        className='productInput'
+        onChange={event => handleChange({types: event.target.value.split(' ')})}
+        value={productInfo.types?.join(' ')}
+      />
 
       <label htmlFor="price">
         Product Price
@@ -61,8 +86,8 @@ export const CreateProductForm = () => {
       />
 
       <div className='adminBtnContainer'>
-        <button onClick={handleClear} className='adminProductBtn'>Clear</button>
-        <button onClick={() => console.log('product created :))')} className='adminProductBtn'>Create Product</button>
+        <button onClick={handleCreateProduct} className='adminProductBtn'>Create Product</button>
+        <button onClick={handleClear} className='adminProductBtn danger'>Clear</button>
       </div>
     </div>
   )

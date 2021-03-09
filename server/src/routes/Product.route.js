@@ -1,4 +1,5 @@
 import ProductController from '../controllers/Product.controller.js'
+import Middlewares from '../middlewares/Middlewares.js'
 
 const routes = (app) => {
   app.get('/products', ProductController.getAllProducts)
@@ -12,6 +13,8 @@ const routes = (app) => {
   app.put('/product/quantity', ProductController.changeQuantity)
   
   app.put('/product/price', ProductController.changePrice)
+  
+  app.put('/product', Middlewares.isAdmin, ProductController.updateProduct)
   
   app.delete('/product', ProductController.deleteProduct)
 }

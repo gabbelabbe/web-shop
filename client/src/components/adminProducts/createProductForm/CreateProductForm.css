@@ -42,3 +42,8 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.danger:hover {
+  background-color: #AD2117;
+  color: white;
+}
