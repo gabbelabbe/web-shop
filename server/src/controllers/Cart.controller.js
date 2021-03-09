@@ -1,4 +1,4 @@
-import CartModel from '../models/Cart.model.mjs'
+const CartModel = require('../models/Cart.model.js')
 
 const createCart = async (req, res) => {
   const cart = new CartModel({
@@ -90,7 +90,7 @@ const updateCartProducts = async (req, res) => {
   }
 }
 
-export default {
+module.exports = {
   createCart,
   deleteCart,
   getAllCarts,

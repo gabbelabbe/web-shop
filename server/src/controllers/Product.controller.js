@@ -1,4 +1,4 @@
-import ProductModel from '../models/Product.model.mjs'
+const ProductModel = require('../models/Product.model.js')
 
 const createProduct = async (req, res) => {
   const product = new ProductModel({
@@ -108,7 +108,7 @@ const queryProduct = async (req, res) => {
   }
 }
 
-export default {
+module.exports = {
   createProduct,
   getAllProducts,
   getOneProduct,

@@ -1,8 +1,8 @@
-import Chai from 'chai'
-import ChaiHTTP from 'chai-http'
-import pkg from 'mocha'
+const Chai = require('chai')
+const ChaiHTTP = require('chai-http')
+const pkg = require('mocha')
 const { describe, it: test } = pkg
-import app from '../index.js'
+const app = require('../index.js')
 
 Chai.should()
 Chai.use(ChaiHTTP)

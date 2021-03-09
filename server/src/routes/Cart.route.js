@@ -1,4 +1,4 @@
-import CartController from '../controllers/Cart.controller.mjs'
+const CartController = require('../controllers/Cart.controller.js')
 
 const routes = (app) => {
   app.get('/carts', CartController.getAllCarts)
@@ -12,6 +12,6 @@ const routes = (app) => {
   app.delete('/cart', CartController.deleteCart)
 }
 
-export default {
+module.exports = {
   routes
 }
