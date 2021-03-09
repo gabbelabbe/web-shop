@@ -1,5 +1,5 @@
-import ProductController from '../controllers/Product.controller.js'
-import Middlewares from '../middlewares/Middlewares.js'
+import ProductController from '../controllers/Product.controller.mjs'
+import Middlewares from '../middlewares/Middlewares.mjs'
 
 const routes = (app) => {
   app.get('/products', ProductController.getAllProducts)

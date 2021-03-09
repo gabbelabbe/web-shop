@@ -1,4 +1,4 @@
-import CartController from '../controllers/Cart.controller.js'
+import CartController from '../controllers/Cart.controller.mjs'
 
 const routes = (app) => {
   app.get('/carts', CartController.getAllCarts)

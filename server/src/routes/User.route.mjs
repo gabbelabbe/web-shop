@@ -1,5 +1,5 @@
-import UserController from '../controllers/User.controller.js'
-import Middlewares from '../middlewares/Middlewares.js'
+import UserController from '../controllers/User.controller.mjs'
+import Middlewares from '../middlewares/Middlewares.mjs'
 
 const routes = (app) => {
   app.post('/user/create', UserController.createUser)

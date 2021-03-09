@@ -1,9 +1,8 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.mjs",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -14,8 +13,8 @@
     "morgan": "^1.10.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs",
     "test": "mocha 'test/**'"
   },
   "devDependencies": {

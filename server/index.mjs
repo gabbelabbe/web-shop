@@ -2,11 +2,11 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import cors from 'cors'
-import Middlewares from './src/middlewares/Middlewares.js'
-import Configurations from './configurations/Configurations.js'
-import UserRoutes from './src/routes/User.route.js'
-import ProductRoutes from './src/routes/Product.route.js'
-import CartRoute from './src/routes/Cart.route.js'
+import Middlewares from './src/middlewares/Middlewares.mjs'
+import Configurations from './configurations/Configurations.mjs'
+import UserRoutes from './src/routes/User.route.mjs'
+import ProductRoutes from './src/routes/Product.route.mjs'
+import CartRoute from './src/routes/Cart.route.mjs'
 
 // Config server
 const app = express()
