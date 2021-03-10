@@ -11,8 +11,8 @@ const CartRoute = require('./src/routes/Cart.route.js')
 
 // Config server
 const app = express()
-if (process.env.ENVIROMENT === 'prod') {
-  app.set('trust proxy', 'loopback')
+if (process.env.ENVIROMENT !== 'dev') {
+  app.set('trust proxy', 1)
 }
 app.use(express.json())
 app.use(session({
