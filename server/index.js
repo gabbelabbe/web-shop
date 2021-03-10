@@ -20,6 +20,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: Configurations.store,
+  proxy: true,
   cookie: { secure: process.env.ENVIROMENT !== 'dev' },
 }))
 app.use(helmet())
