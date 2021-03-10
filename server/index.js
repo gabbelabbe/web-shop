@@ -14,17 +14,16 @@ const app = express()
 if (process.env.ENVIROMENT === 'prod') {
   app.set('trust proxy', 'loopback')
 }
-app.use(helmet())
-app.use(morgan('common'))
 app.use(express.json())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  user: null,
   saveUninitialized: false,
   store: Configurations.store,
-  cookie: { secure: process.env.ENVIROMENT === 'prod', httpOnly: true }
+  cookie: { maxAge: 3600000, httpOnly: true, secure: process.env.ENVIROMENT !== 'dev' },
 }))
+app.use(helmet())
+app.use(morgan('common'))
 const corsOptions = {
   credentials: true,
   origin: process.env.CLIENT_URL, // Update to application url on launch
