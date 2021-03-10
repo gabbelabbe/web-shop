@@ -16,6 +16,7 @@ const createUser = async (req, res) => {
     const dbRes = await user.save()
     const serverUser = await UserModel.findById(dbRes._id, 'username email address userType')
     req.session.user = serverUser
+    req.session.save()
     res.status(201).send(serverUser)
   } catch (err) {
     res.status(500).send({
@@ -72,6 +73,7 @@ const loginUser = async (req, res) => {
     if (validPassword) {
       const signedInUser = await UserModel.findById(user._id, 'username email address userType')
       req.session.user = signedInUser
+      req.session.save()
       return res.status(200).send(signedInUser)
     } else {
       return res.status(400).send({msg: 'Incorrect password or username'})
@@ -98,7 +100,8 @@ const updateUser = async (req, res) => {
 
 const signOut = async (req, res) => {
   try {
-    req.session.destroy()
+    req.session.user = null
+    req.session.save()
     res.status(200).send('Logged Out')
   } catch (err) {
     res.status(500).send({

@@ -20,6 +20,7 @@ app.use(express.json())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
+  user: null,
   saveUninitialized: false,
   store: Configurations.store,
   cookie: { secure: process.env.ENVIROMENT === 'prod', httpOnly: true }
