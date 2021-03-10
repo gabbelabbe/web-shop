@@ -12,6 +12,7 @@ const CartRoute = require('./src/routes/Cart.route.js')
 
 // Config server
 const app = express()
+app.set('trust proxy', 1)
 app.use(helmet())
 app.use(morgan('common'))
 app.use(express.json())
