@@ -45,21 +45,6 @@ a, p, h1, h2, h3, h4, h5, h6, div, button {
   justify-content: center;
 }
 
-.starWarsCard {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  align-items: center;
-  margin: 10px;
-  border-color: black;
-  border: solid;
-  cursor: pointer;
-}
-
-.starWarsCard h3, .starWarsCard p {
-  margin: 3px;
-}
-
 @media only screen and (max-width: 700px) {
   .productsContainer {
     flex-direction: column;

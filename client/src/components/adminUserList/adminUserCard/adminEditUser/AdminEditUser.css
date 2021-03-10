@@ -24,3 +24,17 @@
   background-color: #AD2117;
   color: white;
 }
+
+.adminEditUserContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.adminEditUserInput {
+  margin: 0.7em 0;
+  outline: none;
+  border-width: 0 0 2px;
+  border-color: #000;
+  font-size: 1rem;
+}

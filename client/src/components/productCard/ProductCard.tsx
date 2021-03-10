@@ -1,15 +1,18 @@
-import { iProduct } from "../../shared/interface/props"
+import { iProduct } from "../../shared/interface/states"
 import './ProductCard.css'
 
-export const ProductCard = ({id, imgs, title, text, type}: iProduct) => {
+export const ProductCard = ({_id, name, types, price, quantity}: iProduct) => {
 
   return (
-    <div className='productCardContainer' onClick={() => console.log(id)}>
-      <div style={{backgroundImage: `url(${imgs[0]})`}} className='img' />
-      <div className='productCardContent'>
-        <h3>{title}</h3>
-        <p>{text}</p>
+    <div className='productCardContainer' onClick={() => console.log(_id)}>
+      <h3>{name}</h3>
+      <div className='productCardTypesContainer'>
+        {
+          types ? types.map((type) => <p className='productCardTypeText' key={type}>{type}</p>) : ''
+        }
       </div>
+      <p>{price} kr</p>
+      <p>{quantity} st</p>
     </div>
   )
 }

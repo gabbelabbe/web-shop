@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react"
-import { getAllUsers } from "../../shared/api/apiHandler"
 import { iloginCredentials } from "../../shared/interface/states"
 import { AdminUserCard } from "./adminUserCard/AdminUserCard"
 import './AdminUserList.css'
 
-export const AdminUserList = () => {
-  const [users, setUsers] = useState<iloginCredentials[]>([])
-
-  useEffect(() => {
-    const fetchAllUsers = async () => {
-      const response = await getAllUsers()
-
-      if (response && response.data) {
-        setUsers(response.data)
-      }
-    }
-
-    fetchAllUsers()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+export const AdminUserList = ({ users, setUsers }: { setUsers: React.Dispatch<React.SetStateAction<iloginCredentials[]>>, users: iloginCredentials[] }) => {
   
   return (
     <div className='adminUserList'>

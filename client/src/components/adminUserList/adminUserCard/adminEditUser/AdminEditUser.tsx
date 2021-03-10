@@ -24,15 +24,15 @@ export const AdminEditUser = (
   }
 
   return (
-    <>
-      <input type="text" id='username' value={userInfo.username} onChange={(e) => handleChange({ username: e.target.value })} />
-      <input type="text" id='email' value={userInfo.email} onChange={(e) => handleChange({ email: e.target.value })} />
-      <input type="text" id='address' value={userInfo.address} onChange={(e) => handleChange({ address: e.target.value })} />
-      <input type="text" id='userType' value={userInfo.userType} onChange={(e) => handleChange({ userType: e.target.value })} />
+    <div className='adminEditUserContainer'>
+      <input type="text" id='username' value={userInfo.username} onChange={(e) => handleChange({ username: e.target.value })} className='adminEditUserInput' />
+      <input type="text" id='email' value={userInfo.email} onChange={(e) => handleChange({ email: e.target.value })} className='adminEditUserInput' />
+      <input type="text" id='address' value={userInfo.address} onChange={(e) => handleChange({ address: e.target.value })} className='adminEditUserInput' />
+      <input type="text" id='userType' value={userInfo.userType} onChange={(e) => handleChange({ userType: e.target.value })} className='adminEditUserInput' />
       <div className='iconContainer'>
         <img src={DoneSVG} alt='Done' onClick={() => handleEdit()} className='adminIcon done' />
         <img src={CancelSVG} alt='Cancel' onClick={() => setEdit(false)} className='adminIcon cancel' />
       </div>
-    </>
+    </div>
   )
 }

@@ -4,8 +4,8 @@
   width: 20vw;
   margin: 2rem;
   background-color: rgba(0,0,0,0.2);
-  height: 20vw;
   cursor: pointer;
+  padding: 1em;
 }
 
 .img {
@@ -16,14 +16,16 @@
   background-position: center;
 }
 
-.productCardContent {
-  margin: 0.5rem;
-  height: 50%;
-  overflow: hidden;
-}
-
 .productCardContent h3, .productCardContent p {
   margin: 0;
+}
+
+.productCardTypesContainer {
+  display: flex;
+}
+
+.productCardTypeText {
+  margin: 0.5em 0.5em;
 }
 
 @media only screen and (max-width: 700px) {

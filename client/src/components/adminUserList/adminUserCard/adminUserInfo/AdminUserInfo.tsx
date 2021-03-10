@@ -9,10 +9,10 @@ export const AdminUserInfo = ({ user, setEdit }: { user: iloginCredentials, setE
 
   return (
     <>
-      <h3>Username: {user.username}{authUser._id === user._id ? ' (you)' : ''}</h3>
-      <h3>Email: {user.email}</h3>
-      <h3>Address: {user.address}</h3>
-      <h3>User type: {user.userType}</h3>
+      <p><strong>Username:</strong> {user.username}{authUser._id === user._id ? ' (you)' : ''}</p>
+      <p><strong>Email:</strong> {user.email}</p>
+      <p><strong>Address:</strong> {user.address}</p>
+      <p><strong>User type:</strong> {user.userType}</p>
       <div className='iconContainer'>
         <img src={EditSVG} alt='Edit' onClick={() => setEdit(true)} className='adminIcon edit' />
       </div>
