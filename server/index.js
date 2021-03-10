@@ -18,8 +18,8 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }))
 const corsOptions = {
   credentials: true,
