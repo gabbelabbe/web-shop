@@ -3,7 +3,6 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const cors = require('cors')
 const session = require('express-session')
-const cookieParser = require('cookie-parser')
 const Middlewares = require('./src/middlewares/Middlewares.js')
 const Configurations = require('./configurations/Configurations.js')
 const UserRoutes = require('./src/routes/User.route.js')
@@ -18,7 +17,6 @@ if (process.env.ENVIROMENT === 'prod') {
 app.use(helmet())
 app.use(morgan('common'))
 app.use(express.json())
-app.use(cookieParser())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,

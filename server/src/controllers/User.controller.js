@@ -98,7 +98,7 @@ const updateUser = async (req, res) => {
 
 const signOut = async (req, res) => {
   try {
-    req.session.user = undefined
+    req.session.destroy()
     res.status(200).send('Logged Out')
   } catch (err) {
     res.status(500).send({
