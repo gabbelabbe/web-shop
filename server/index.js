@@ -13,7 +13,7 @@ const CartRoute = require('./src/routes/Cart.route.js')
 // Config server
 const app = express()
 if (process.env.ENVIROMENT === 'prod') {
-  app.set('trust proxy', 1)
+  app.set('trust proxy', 'loopback')
 }
 app.use(helmet())
 app.use(morgan('common'))
@@ -24,7 +24,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: Configurations.store,
-  cookie: { secure: process.env.ENVIROMENT === 'prod', sameSite: true, httpOnly: true }
+  cookie: { secure: process.env.ENVIROMENT === 'prod', httpOnly: true }
 }))
 const corsOptions = {
   credentials: true,

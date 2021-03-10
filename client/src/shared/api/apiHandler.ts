@@ -18,19 +18,19 @@ export const getMoreInfo = (url: string) => {
 }
 
 export const signUp = (email: string, username: string, password: string) => {
-  return Axios.post(baseUrl + 'user/create', {email, username, password})
+  return Axios.post(baseUrl + 'user/create', {email, username, password}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const signIn = (username: string, password: string) => {
-  return Axios.post(baseUrl + 'user/login', {username, password})
+  return Axios.post(baseUrl + 'user/login', {username, password}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const signOut = () => {
-  return Axios.post(baseUrl + 'user/logout')
+  return Axios.post(baseUrl + 'user/logout', {}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
