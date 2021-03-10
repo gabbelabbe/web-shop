@@ -16,7 +16,7 @@ const createUser = async (req, res) => {
     const dbRes = await user.save()
     const serverUser = await UserModel.findById(dbRes._id, 'username email address userType')
     req.session.user = serverUser
-    res.status(201).send(serverUser)
+    res.status(201).send({ data: serverUser })
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to create user.',
@@ -28,7 +28,7 @@ const createUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const dbRes = await UserModel.find({}, 'username email address userType')
-    res.status(200).send(dbRes)
+    res.status(200).send({ data: dbRes })
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to get users.',
@@ -40,7 +40,7 @@ const getAllUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const dbRes = await UserModel.findByIdAndDelete(req.body._id)
-    res.status(200).send(dbRes)
+    res.status(200).send({ data: dbRes })
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to delete user.',
@@ -55,7 +55,7 @@ const changePwd = async (req, res) => {
     const newPwd = await bcrypt.hash(req.body.password, salt)
 
     const dbRes = await UserModel.updateOne({ _id: req.body._id }, { password: newPwd })
-    res.status(200).send(dbRes)
+    res.status(200).send({ data: dbRes })
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update password.',
@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
     if (validPassword) {
       const signedInUser = await UserModel.findById(user._id, 'username email address userType')
       req.session.user = signedInUser
-      return res.status(200).send(signedInUser)
+      return res.status(200).send({ data: signedInUser })
     } else {
       return res.status(400).send({msg: 'Incorrect password or username'})
     }
@@ -87,7 +87,7 @@ const loginUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const dbRes = await UserModel.updateOne({ _id: req.body._id }, {...req.body})
-    res.status(200).send(dbRes)
+    res.status(200).send({ data: dbRes })
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update password.',

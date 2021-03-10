@@ -6,8 +6,8 @@ const baseStarWarsUrl = 'https://swapi.dev/api/'
 const baseUrl = process.env.REACT_APP_SERVER_BASE_URL
 
 export const getPerson = (id: number | string): Promise<iStarWarsCharacters> => {
-  return Axios.get(baseStarWarsUrl + 'people/' + id + '/')
-    .then(res => res.data)
+  return fetch(baseStarWarsUrl + 'people/' + id + '/', { credentials: 'include' })
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
 
@@ -18,26 +18,67 @@ export const getMoreInfo = (url: string) => {
 }
 
 export const signUp = (email: string, username: string, password: string) => {
-  return Axios.post(baseUrl + 'user/create', {email, username, password}, { withCredentials: true })
-    .then(res => res)
+  return fetch(baseUrl + 'user/create', 
+    {
+      credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify({
+        email, 
+        username, 
+        password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+  )
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
 
 export const signIn = (username: string, password: string) => {
-  return Axios.post(baseUrl + 'user/login', {username, password}, { withCredentials: true })
-    .then(res => res)
+  return fetch(baseUrl + 'user/login', 
+    {
+      credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify({
+        username, 
+        password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+  )
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
 
 export const signOut = () => {
-  return Axios.post(baseUrl + 'user/logout', {}, { withCredentials: true })
-    .then(res => res)
+  return fetch(baseUrl + 'user/logout', 
+    {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+  )
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
 
 export const getAllUsers = () => {
-  return Axios.get(baseUrl + 'users', { withCredentials: true })
-    .then(res => res)
+  return fetch(baseUrl + 'users', 
+    {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+  )
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
 
@@ -66,7 +107,18 @@ export const deleteProduct = (_id: string) => {
 }
 
 export const updateUser = (userInfo: iloginCredentials) => {
-  return Axios.put(baseUrl + 'user/change', {...userInfo})
-    .then(res => res)
+  return fetch(baseUrl + 'user/change', 
+    {
+      credentials: 'include',
+      method: 'put',
+      body: JSON.stringify({
+        ...userInfo
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+  )
+    .then(res => res.json())
     .catch(err => console.error(err))
 }
