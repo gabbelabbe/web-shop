@@ -13,7 +13,7 @@ const CartRoute = require('./src/routes/Cart.route.js')
 // Config server
 const app = express()
 if (process.env.ENVIROMENT === 'prod') {
-  app.set('trust proxy', true)
+  app.set('trust proxy', 1)
 }
 app.use(helmet())
 app.use(morgan('common'))
