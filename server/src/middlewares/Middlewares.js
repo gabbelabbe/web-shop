@@ -19,6 +19,7 @@ const errHandler = (error, req, res) => {
 }
 
 const isAdmin = (req, res, next) => {
+  console.log(req.session)
   if (req.session.user && req.session.user.userType === 'admin') {
     next()
   } else {
