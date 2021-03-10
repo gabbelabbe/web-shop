@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { createProduct } from '../../../shared/api/apiHandler'
+import { createProduct, updateProduct } from '../../../shared/api/apiHandler'
 import { iProduct } from '../../../shared/interface/states'
 import './CreateProductForm.css'
 import { ProductsContext } from '../../../shared/provider/ProductsProvider'
@@ -21,10 +21,18 @@ export const CreateProductForm = (
   }
 
   const handleCreateProduct = async () => {
-    const res = await createProduct(productInfo)
-    if (res && res.status === 201) {
-      setProducts([...products, res.data])
-      handleClear()
+    if (!productInfo._id) {
+      const res = await createProduct(productInfo)
+      if (res && res.status === 201) {
+        setProducts([...products, res.data])
+        handleClear()
+      }
+    } else {
+      const res = await updateProduct(productInfo)
+      if (res && res.status === 200) {
+        setProducts([...products.filter((p) => productInfo._id !== p._id), productInfo])
+        handleClear()
+      }
     }
   }
 
@@ -86,7 +94,7 @@ export const CreateProductForm = (
       />
 
       <div className='adminBtnContainer'>
-        <button onClick={handleCreateProduct} className='adminProductBtn'>Create Product</button>
+        <button onClick={handleCreateProduct} className='adminProductBtn'>{productInfo._id ? 'Edit' : 'Create'}</button>
         <button onClick={handleClear} className='adminProductBtn danger'>Clear</button>
       </div>
     </div>

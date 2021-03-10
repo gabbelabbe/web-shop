@@ -31,7 +31,7 @@
 }
 
 .edit {
-  margin-left: auto;
+  margin-left: auto!important;
 }
 
 .edit:hover {

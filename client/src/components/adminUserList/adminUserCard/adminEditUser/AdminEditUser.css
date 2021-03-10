@@ -1,0 +1,26 @@
+.iconContainer {
+  display: flex;
+  margin-top: auto;
+}
+
+.adminIcon {
+  margin: 0.25rem;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: black;
+}
+
+.done {
+  margin-left: auto!important;
+}
+
+.done:hover {
+  background-color: #1B89FA;
+}
+
+.cancel:hover {
+  background-color: #AD2117;
+  color: white;
+}

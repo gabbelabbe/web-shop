@@ -14,7 +14,8 @@ const createUser = async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt)
   try {
     const dbRes = await user.save()
-    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType') 
+    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType')
+    req.session.user = serverUser
     res.status(201).send(serverUser)
   } catch (err) {
     res.status(500).send({
@@ -70,25 +71,38 @@ const loginUser = async (req, res) => {
 
     if (validPassword) {
       const signedInUser = await UserModel.findById(user._id, 'username email address userType')
-      res.status(200).send(signedInUser)
+      req.session.user = signedInUser
+      return res.status(200).send(signedInUser)
     } else {
-      res.status(400).send({msg: 'Incorrect password or username'})
+      return res.status(400).send({msg: 'Incorrect password or username'})
     }
   } catch (err) {
-    res.status(500).send({
+    return res.status(500).send({
       msg: 'Error while trying to log you in.',
       stack: err
     })
   }
 }
 
-const updateUserType = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const dbRes = await UserModel.updateOne({ _id: req.body._id }, { userType: req.body.newUserType })
+    const dbRes = await UserModel.updateOne({ _id: req.body._id }, {...req.body})
     res.status(200).send(dbRes)
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update password.',
+      stack: err
+    })
+  }
+}
+
+const signOut = async (req, res) => {
+  try {
+    req.session.user = undefined
+    res.status(200).send('Logged Out')
+  } catch (err) {
+    res.status(500).send({
+      msg: 'Error while trying to logout.',
       stack: err
     })
   }
@@ -100,5 +114,6 @@ module.exports = {
   deleteUser,
   changePwd,
   loginUser,
-  updateUserType
+  updateUser,
+  signOut
 }

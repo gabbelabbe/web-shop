@@ -86,7 +86,7 @@ const changePrice = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const dbRes = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { price: req.body.price, quantity: req.body.quantity, name: req.body.name, types: req.body.types })
+    const dbRes = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { ...req.body })
     res.status(200).send(dbRes)
   } catch (err) {
     res.status(500).send({

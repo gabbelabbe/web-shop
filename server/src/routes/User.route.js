@@ -6,13 +6,15 @@ const routes = (app) => {
 
   app.post('/user/login', UserController.loginUser)
 
-  app.get('/users', UserController.getAllUsers)
+  app.post('/user/logout', UserController.signOut)
+
+  app.get('/users', Middlewares.isAdmin, UserController.getAllUsers)
 
   app.delete('/user', UserController.deleteUser)
 
   app.put('/user/change/password', UserController.changePwd)
 
-  app.put('/user/change/type', Middlewares.isAdmin, UserController.updateUserType)
+  app.put('/user/change', Middlewares.isAdmin, UserController.updateUser)
 }
 
 module.exports = {

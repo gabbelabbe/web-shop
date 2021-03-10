@@ -2,6 +2,8 @@ const express = require('express')
 const helmet = require('helmet')
 const morgan = require('morgan')
 const cors = require('cors')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
 const Middlewares = require('./src/middlewares/Middlewares.js')
 const Configurations = require('./configurations/Configurations.js')
 const UserRoutes = require('./src/routes/User.route.js')
@@ -13,9 +15,15 @@ const app = express()
 app.use(helmet())
 app.use(morgan('common'))
 app.use(express.json())
+app.use(cookieParser())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
 const corsOptions = {
   credentials: true,
-  origin: '*', // Update to application url on launch
+  origin: process.env.CLIENT_URL, // Update to application url on launch
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))

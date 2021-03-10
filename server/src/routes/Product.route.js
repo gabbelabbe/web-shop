@@ -8,7 +8,7 @@ const routes = (app) => {
 
   app.get('/product/:_id', ProductController.getOneProduct)
 
-  app.post('/product', ProductController.createProduct)
+  app.post('/product', Middlewares.isAdmin, ProductController.createProduct)
   
   app.put('/product/quantity', ProductController.changeQuantity)
   
@@ -16,7 +16,7 @@ const routes = (app) => {
   
   app.put('/product', Middlewares.isAdmin, ProductController.updateProduct)
   
-  app.delete('/product', ProductController.deleteProduct)
+  app.delete('/product', Middlewares.isAdmin, ProductController.deleteProduct)
 }
 
 module.exports = {

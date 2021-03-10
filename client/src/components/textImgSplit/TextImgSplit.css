@@ -1,5 +1,6 @@
 .textImgSplit {
   display: flex;
+  margin: 0 2em;
 }
 
 .textImgSplit div {
@@ -10,11 +11,13 @@
 }
 
 .textImgSplit div h2 {
+  margin-top: 0;
   align-self: center;
 }
 
 .textImgSplit div p {
   font-size: 1.25rem;
+  margin-top: 0;
 }
 
 .textImgSplit img {

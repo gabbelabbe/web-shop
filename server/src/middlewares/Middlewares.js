@@ -8,7 +8,7 @@ const notFound = (req, res, next) => {
   next(error)
 }
 
-const errHandler = (error, req, res, next) => {
+const errHandler = (error, req, res) => {
   const statusCode = res.statusCode.toString()[0] === '2' || res.statusCode.toString()[0] === '3' ? 500 : res.statusCode
   res.status(statusCode)
   res.json({
@@ -19,7 +19,7 @@ const errHandler = (error, req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-  if (req.body.userType === 'admin') {
+  if (req.session.user && req.session.user.userType === 'admin') {
     next()
   } else {
     res.status(401).send('You are not admin >:(')
