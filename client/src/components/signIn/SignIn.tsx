@@ -18,6 +18,7 @@ export const SignIn = () => {
   const handleSignIn = async () => {
     if (loginCredentials.username  && loginCredentials.password) {
       const response = await signIn(loginCredentials.username, loginCredentials.password)
+      console.log(response)
       if (response && response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
         setAuthUser(response.data)

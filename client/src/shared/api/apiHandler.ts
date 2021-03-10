@@ -42,31 +42,31 @@ export const getAllUsers = () => {
 }
 
 export const getAllProducts = () => {
-  return Axios.get(baseUrl + 'products')
+  return Axios.get(baseUrl + 'products', { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const createProduct = (productInfo: iProduct) => {
-  return Axios.post(baseUrl + 'product', {...productInfo})
+  return Axios.post(baseUrl + 'product', {...productInfo}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const updateProduct = (productInfo: iProduct) => {
-  return Axios.put(baseUrl + 'product', {...productInfo})
+  return Axios.put(baseUrl + 'product', {...productInfo}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const deleteProduct = (_id: string) => {
-  return Axios.delete(baseUrl + 'product', { data: {_id: _id} })
+  return Axios.delete(baseUrl + 'product', { data: {_id: _id}, withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
 
 export const updateUser = (userInfo: iloginCredentials) => {
-  return Axios.put(baseUrl + 'user/change', {...userInfo})
+  return Axios.put(baseUrl + 'user/change', {...userInfo}, { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
