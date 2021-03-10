@@ -36,7 +36,7 @@ export const signOut = () => {
 }
 
 export const getAllUsers = () => {
-  return Axios.get(baseUrl + 'users')
+  return Axios.get(baseUrl + 'users', { withCredentials: true })
     .then(res => res)
     .catch(err => console.error(err))
 }
