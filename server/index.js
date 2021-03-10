@@ -21,7 +21,7 @@ app.use(session({
   saveUninitialized: false,
   store: Configurations.store,
   proxy: true,
-  cookie: { secure: process.env.ENVIROMENT !== 'dev' },
+  //cookie: { secure: process.env.ENVIROMENT !== 'dev' }, // enable this when i figure out how it works
 }))
 app.use(helmet())
 app.use(morgan('common'))
