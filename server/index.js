@@ -20,7 +20,8 @@ app.use(cookieParser())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: Configurations.store
 }))
 const corsOptions = {
   credentials: true,

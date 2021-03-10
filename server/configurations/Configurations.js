@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 dotenv.config()
 
@@ -19,7 +21,13 @@ const connectToPort = (app) => {
   })
 }
 
+const store = new MongoDBStore({
+  uri: process.env.DATABASE_URL,
+  collection: 'sessions'
+})
+
 module.exports = {
   connectToDb,
-  connectToPort
+  connectToPort,
+  store
 }

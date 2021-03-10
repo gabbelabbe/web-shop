@@ -185,6 +185,15 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+archetype@0.12.x:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/archetype/-/archetype-0.12.0.tgz#90f1090917b34cbb398ae6a2520e451219365581"
+  integrity sha512-kSuMmbcSC69EhmUtwM3pmE1dghtjqrsv9MhgTsShtHY5zOOzT5KVeLROwVYsBeq78ELPKstNw7LyTvcXgOC/cA==
+  dependencies:
+    lodash.clonedeep "4.x"
+    lodash.set "4.x"
+    mpath "0.5.1"
+
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
@@ -488,6 +497,14 @@ configstore@^5.0.1:
     unique-string "^2.0.0"
     write-file-atomic "^3.0.0"
     xdg-basedir "^4.0.0"
+
+connect-mongodb-session@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/connect-mongodb-session/-/connect-mongodb-session-2.4.1.tgz#58b9cf42da129339e3a78db749f4dcb7cbda4a75"
+  integrity sha512-pfTy1fAVYPhE7nFS4k/MoBm4C14PIQYz008TrZc/HIGeJhsZuxfYI5fsfC+neBZezFK28sBGHhao+9iFIjOggw==
+  dependencies:
+    archetype "0.12.x"
+    mongodb "3.6.x"
 
 content-disposition@0.5.3:
   version "0.5.3"
@@ -1383,6 +1400,16 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash.clonedeep@4.x:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+
+lodash.set@4.x:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
+
 lodash@^4.17.20:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
@@ -1504,7 +1531,7 @@ mocha@^8.3.1:
     yargs-parser "20.2.4"
     yargs-unparser "2.0.0"
 
-mongodb@3.6.4:
+mongodb@3.6.4, mongodb@3.6.x:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.4.tgz#ca59fd65b06831308262372ef9df6b78f9da97be"
   integrity sha512-Y+Ki9iXE9jI+n9bVtbTOOdK0B95d6wVGSucwtBkvQ+HIvVdTCfpVRp01FDC24uhC/Q2WXQ8Lpq3/zwtB5Op9Qw==
@@ -1550,6 +1577,11 @@ morgan@^1.10.0:
     depd "~2.0.0"
     on-finished "~2.3.0"
     on-headers "~1.0.2"
+
+mpath@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.5.1.tgz#17131501f1ff9e6e4fbc8ffa875aa7065b5775ab"
+  integrity sha512-H8OVQ+QEz82sch4wbODFOz+3YQ61FYz/z3eJ5pIdbMEaUzDqA268Wd+Vt4Paw9TJfvDgVKaayC0gBzMIw2jhsg==
 
 mpath@0.8.3:
   version "0.8.3"
