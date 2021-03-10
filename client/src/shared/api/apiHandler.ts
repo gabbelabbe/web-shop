@@ -31,6 +31,12 @@ export const signIn = (username: string, password: string) => {
     .catch(err => console.error(err))
 }
 
+export const signOut = () => {
+  return axiosInstance.post(baseUrl + 'user/logout')
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
 export const getAllUsers = () => {
   return axiosInstance.get(baseUrl + 'users')
     .then(res => res)
