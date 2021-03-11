@@ -6,7 +6,7 @@
   <ul>
     <li>Projektet är skrivit i typescript och använder paket så som <a href="https://reactrouter.com/">react-router-dom</a></li>
   </ul>
-  <li>./server finns inte än men det kommer innehålla en node server som körs på express. 👩‍💻</li>
+  <li>./server innehåller en node server som körs på express och använder mongodb som databas. 👩‍💻</li>
 </ul>
 
 ## Övrigt 💡:
