@@ -37,10 +37,6 @@ export const Admin = () => {
             {
               view === 'users' ? <AdminUserList users={users} setUsers={setUsers} /> : null
             }
-
-            {
-              view === 'carts' ? <h1>Carts</h1> : null
-            }
           </div>
         </CSSTransition>
       </SwitchTransition>

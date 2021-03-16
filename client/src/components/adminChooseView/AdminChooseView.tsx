@@ -6,7 +6,6 @@ export const AdminChooseView = ({ view, setView }: { view: string, setView: Reac
     <div className='adminButtonContainer' >
       <button className={'adminViewButton' + (view === 'products' ? ' selected' : '')} onClick={() => setView('products')} >Products</button>
       <button className={'adminViewButton' + (view === 'users' ? ' selected' : '')} onClick={() => setView('users')} >Users</button>
-      <button className={'adminViewButton' + (view === 'carts' ? ' selected' : '')} onClick={() => setView('carts')} >Carts</button>
     </div>
   )
 }

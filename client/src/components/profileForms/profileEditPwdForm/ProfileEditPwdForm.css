@@ -1,4 +1,4 @@
-.editInfoForm {
+.editPwdForm {
   margin-bottom: auto;
   margin-top: auto;
   align-self: center;
@@ -9,7 +9,7 @@
   border-style: solid;
 }
 
-.editInfoInput {
+.editPwdInput {
   margin-bottom: 20px;
   outline: none;
   border-width: 0 0 2px;
@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.editInfoInput:focus {
+.editPwdInput:focus {
   border-color: #1B89FA;
 }
 
@@ -50,7 +50,8 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .editInfoForm {
+  .editPwdForm {
     width: 100%;
+    margin-top: 1rem;
   }
 }

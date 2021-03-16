@@ -79,33 +79,35 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const user = await UserModel.findById(req.session.user._id, 'username email address password')
-    const validPassword = await bcrypt.compare(req.body.oldPassword, user.password)
+    const newUserInfo = {...req.body}
+    delete newUserInfo.oldPassword
+    delete newUserInfo.newPassword
+    delete newUserInfo.cart
 
-    if (validPassword) {
-      const salt = await bcrypt.genSalt(10)
-      const newPwd = await bcrypt.hash(req.body.newPassword, salt)
-      
-      const newUserInfo = {...req.body}
-      delete newUserInfo.oldPassword
-      delete newUserInfo.newPassword
-      delete newUserInfo.cart
-      newUserInfo.password = newPwd
-      
-      await UserModel.updateOne({ _id: req.body._id }, { ...newUserInfo })
-      const signedInUser = await (await UserModel.findById(newUserInfo._id, 'username email address userType cart'))
-        .populate({
-          path: 'cart', select: 'products', populate: { path: 'products', populate: { path: 'product', select: 'name types price' }}
-        })
+    if (req.body.oldPassword && req.body.newPassword) {
+      const validPassword = await bcrypt.compare(req.body.oldPassword, user.password)
 
-      req.session.user = signedInUser
-      req.session.save((err) => {
-        if (err)
-          console.error(err)
-      })
-      return res.status(200).send(signedInUser)
-    } else {
-      return res.status(401).send('Old password didnt add up')
+      if (validPassword) {
+        const salt = await bcrypt.genSalt(10)
+        const newPwd = await bcrypt.hash(req.body.newPassword, salt)
+        newUserInfo.password = newPwd
+      } else {
+        return res.status(401).send('Old password didnt add up')
+      }
     }
+
+    await UserModel.updateOne({ _id: req.body._id }, { ...newUserInfo })
+    const signedInUser = await (await UserModel.findById(newUserInfo._id, 'username email address userType cart'))
+      .populate({
+        path: 'cart', select: 'products', populate: { path: 'products', populate: { path: 'product', select: 'name types price' }}
+      })
+
+    req.session.user = signedInUser
+    req.session.save((err) => {
+      if (err)
+        console.error(err)
+    })
+    return res.status(200).send(signedInUser)
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update password.',
