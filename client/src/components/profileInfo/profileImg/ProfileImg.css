@@ -1,9 +1,0 @@
-.profileDiv {
-  display: flex;
-  align-items: center;
-}
-
-.profileImg {
-  max-height: 6rem;
-  border-radius: 6rem;
-}

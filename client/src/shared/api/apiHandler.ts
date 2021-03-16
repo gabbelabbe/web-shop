@@ -23,6 +23,12 @@ export const signOut = () => {
     .catch(err => console.error(err))
 }
 
+export const deleteUser = (_id?: string) => {
+  return Axios.delete(baseUrl + 'user', { data: {_id: _id} })
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
 export const getAllUsers = () => {
   return Axios.get(baseUrl + 'users')
     .then(res => res)
@@ -53,8 +59,14 @@ export const deleteProduct = (_id: string) => {
     .catch(err => console.error(err))
 }
 
-export const updateUser = (userInfo: iloginCredentials) => {
-  return Axios.put(baseUrl + 'user/change', {...userInfo})
+export const adminUpdateUser = (userInfo: iloginCredentials) => {
+  return Axios.put(baseUrl + 'user/admin/update', {...userInfo})
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const editUser = (userInfo: any) => {
+  return Axios.put(baseUrl + 'user/update', {...userInfo})
     .then(res => res)
     .catch(err => console.error(err))
 }

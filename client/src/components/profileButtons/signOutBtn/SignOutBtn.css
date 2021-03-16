@@ -1,7 +1,5 @@
 .signOutBtn {
-  width: 100px;
-  margin: auto 2rem 2rem ;
-  align-self: flex-end;
+  margin: 0 1rem ;
   cursor: pointer;
   border-radius: 10px;
   border: none;

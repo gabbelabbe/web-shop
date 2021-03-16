@@ -1,0 +1,17 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 4rem - 2em);
+}
+
+.infoAndFormContainer {
+  display: flex;
+  margin: 5rem;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .infoAndFormContainer {
+    margin: 2rem;
+  }
+}

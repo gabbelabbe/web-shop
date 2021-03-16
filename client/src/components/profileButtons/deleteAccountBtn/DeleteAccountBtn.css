@@ -1,0 +1,14 @@
+.deleteAccountBtn {
+  margin: 0 1rem ;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: white;
+  padding: 10px;
+  font-size: 1em;
+}
+
+.deleteAccountBtn:hover {
+  background-color: #AD2117;
+}

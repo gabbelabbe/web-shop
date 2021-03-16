@@ -2,8 +2,7 @@ const CartModel = require('../models/Cart.model.js')
 
 const createCart = async (req, res) => {
   const cart = new CartModel({
-    userID: req.body.userID,
-    products: [{product: req.body.productID, quantity: req.body.quantity}]
+    userID: req.session.user._id
   })
 
   try {
@@ -75,8 +74,8 @@ const updateCartProducts = async (req, res) => {
       const dbRes = await cart.save()
       return res.status(200).send(dbRes)
     } else {
-      const newCart = await Cart.create({
-        userId,
+      const newCart = await CartModel.create({
+        userID: req.session.user._id,
         products: [{product: req.body.productID, quantity: req.body.quantity}]
       })
 

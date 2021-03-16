@@ -26,8 +26,17 @@ const isAdmin = (req, res, next) => {
   }
 }
 
+const sameUserSignedIn = (req, res, next) => {
+  if (req.session.user && req.session.user._id.toString() === req.body._id) {
+    next()
+  } else {
+    res.status(401).send('You are not this user!')
+  }
+}
+
 module.exports = {
   notFound,
   errHandler,
-  isAdmin
+  isAdmin,
+  sameUserSignedIn
 }

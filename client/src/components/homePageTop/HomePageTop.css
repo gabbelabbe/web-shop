@@ -14,3 +14,19 @@
   font-size: 2rem;
   margin: 0;
 }
+
+@media only screen and (max-width: 700px) {
+  .homePageTop h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .homePageTop h3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .homePageTop {
+    margin-bottom: 3em;
+  }
+}

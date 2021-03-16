@@ -7,7 +7,7 @@ import { Home } from "../view/Home"
 import { SignInView } from "../view/SignInView"
 import RoutingPaths from './RoutingPath'
 import { UserContext } from '../shared/provider/UserProvider'
-import { Profile } from '../view/Profile'
+import { Profile } from '../view/profile/Profile'
 import { Products } from '../view/Products'
 import { Cart } from '../view/Cart'
 import { Product } from '../view/Product'

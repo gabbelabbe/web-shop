@@ -2,7 +2,7 @@ import { useState } from "react"
 import { iloginCredentials } from "../../../../shared/interface/states"
 import DoneSVG from '../../../../shared/images/done-white-18dp.svg'
 import CancelSVG from '../../../../shared/images/clear-white-18dp.svg'
-import { updateUser } from "../../../../shared/api/apiHandler"
+import { adminUpdateUser } from "../../../../shared/api/apiHandler"
 import './AdminEditUser.css'
 
 export const AdminEditUser = (
@@ -16,7 +16,7 @@ export const AdminEditUser = (
   }
 
   const handleEdit = async () => {
-    const res = await updateUser(userInfo)
+    const res = await adminUpdateUser(userInfo)
     if (res && res.status === 200) {
       setUsers([...users.filter((u) => userInfo._id !== u._id), userInfo])
       setEdit(false)

@@ -1,25 +1,31 @@
 const UserModel = require('../models/User.model.js')
+const CartModel = require('../models/Cart.model.js')
 const bcrypt = require('bcryptjs')
 
 const createUser = async (req, res) => {
-  const user = new UserModel({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    address: req.body.address,
-    userType: 'customer'
-  })
-
-  const salt = await bcrypt.genSalt(10)
-  user.password = await bcrypt.hash(user.password, salt)
   try {
+    const cart = new CartModel()
+    const cartRes = await cart.save()
+
+    const user = new UserModel({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      address: req.body.address,
+      userType: 'customer',
+      cart: cartRes._id
+    })
+    const salt = await bcrypt.genSalt(10)
+    user.password = await bcrypt.hash(user.password, salt)
     const dbRes = await user.save()
-    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType')
+    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType cart').populate('cart', 'products').execPopulate()
     req.session.user = serverUser
     req.session.save((err) => {
       if (err)
         console.error(err)
     })
+    delete serverUser.cartId
+
     res.status(201).send(serverUser)
   } catch (err) {
     res.status(500).send({
@@ -43,8 +49,16 @@ const getAllUsers = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const dbRes = await UserModel.findByIdAndDelete(req.body._id)
-    res.status(200).send(dbRes)
+    const dbRes = await UserModel.findByIdAndDelete((req.session.user ? req.session.user._id : req.body._id))
+    console.log(dbRes)
+    const cartRes = await CartModel.findByIdAndDelete(dbRes.cart)
+    req.session.user = null
+    req.session.save((err) => {
+      if (err)
+        console.error(err)
+    })
+    delete dbRes.password
+    res.status(200).send({user: dbRes, cart: cartRes})
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to delete user.',
@@ -53,13 +67,33 @@ const deleteUser = async (req, res) => {
   }
 }
 
-const changePwd = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10)
-    const newPwd = await bcrypt.hash(req.body.password, salt)
+    const user = await UserModel.findById(req.session.user._id, 'username email address password')
+    const validPassword = await bcrypt.compare(req.body.oldPassword, user.password)
 
-    const dbRes = await UserModel.updateOne({ _id: req.body._id }, { password: newPwd })
-    res.status(200).send(dbRes)
+    if (validPassword) {
+      const salt = await bcrypt.genSalt(10)
+      const newPwd = await bcrypt.hash(req.body.newPassword, salt)
+      
+      const newUserInfo = {...req.body}
+      delete newUserInfo.oldPassword
+      delete newUserInfo.newPassword
+      delete newUserInfo.cart
+      newUserInfo.password = newPwd
+      
+      await UserModel.updateOne({ _id: req.body._id }, { ...newUserInfo })
+      const signedInUser = await (await UserModel.findById(newUserInfo._id, 'username email address userType cart')).populate('cart', 'products').execPopulate()
+
+      req.session.user = signedInUser
+      req.session.save((err) => {
+        if (err)
+          console.error(err)
+      })
+      return res.status(200).send(signedInUser)
+    } else {
+      return res.status(401).send('Old password didnt add up')
+    }
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update password.',
@@ -74,7 +108,7 @@ const loginUser = async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
 
     if (validPassword) {
-      const signedInUser = await UserModel.findById(user._id, 'username email address userType')
+      const signedInUser = await (await UserModel.findById(user._id, 'username email address userType cart')).populate('cart', 'products').execPopulate()
       req.session.user = signedInUser
       req.session.save((err) => {
         if (err)
@@ -92,13 +126,13 @@ const loginUser = async (req, res) => {
   }
 }
 
-const updateUser = async (req, res) => {
+const adminUpdateUser = async (req, res) => {
   try {
     const dbRes = await UserModel.updateOne({ _id: req.body._id }, {...req.body})
     res.status(200).send(dbRes)
   } catch (err) {
     res.status(500).send({
-      msg: 'Error while trying to update password.',
+      msg: 'Error while trying to update userinfo.',
       stack: err
     })
   }
@@ -124,8 +158,8 @@ module.exports = {
   createUser,
   getAllUsers,
   deleteUser,
-  changePwd,
-  loginUser,
   updateUser,
+  loginUser,
+  adminUpdateUser,
   signOut
 }

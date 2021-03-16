@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import RoutingPath from '../../routes/RoutingPath'
-import { signOut } from '../../shared/api/apiHandler'
-import { UserContext } from '../../shared/provider/UserProvider'
+import RoutingPath from '../../../routes/RoutingPath'
+import { signOut } from '../../../shared/api/apiHandler'
+import { UserContext } from '../../../shared/provider/UserProvider'
 import './SignOutBtn.css'
 
 export const SignOutBtn = () => {

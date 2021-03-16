@@ -12,9 +12,9 @@ const routes = (app) => {
 
   app.delete('/user', UserController.deleteUser)
 
-  app.put('/user/change/password', UserController.changePwd)
+  app.put('/user/update', Middlewares.sameUserSignedIn, UserController.updateUser)
 
-  app.put('/user/change', Middlewares.isAdmin, UserController.updateUser)
+  app.put('/user/admin/update', Middlewares.isAdmin, UserController.adminUpdateUser)
 }
 
 module.exports = {
