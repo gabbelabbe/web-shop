@@ -1,4 +1,4 @@
-.signInForm {
+.editInfoForm {
   margin-bottom: auto;
   margin-top: auto;
   align-self: center;
@@ -9,7 +9,7 @@
   border-style: solid;
 }
 
-.signInInput {
+.editInfoInput {
   margin-bottom: 20px;
   outline: none;
   border-width: 0 0 2px;
@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.signInInput:focus {
+.editInfoInput:focus {
   border-color: #1B89FA;
 }
 
@@ -49,18 +49,8 @@
   align-items: center;
 }
 
-.password-icon {
-  cursor: pointer;
-  height: 20px;
-}
-
-.wrap-input100 {
-  width: 100%;
-  display: flex;
-}
-
 @media only screen and (max-width: 700px) {
-  .signInForm {
+  .editInfoForm {
     width: 50%;
   }
 }

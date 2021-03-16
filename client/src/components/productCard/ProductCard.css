@@ -1,11 +1,29 @@
 .productCardContainer {
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  width: 10vw;
   margin: 2rem;
-  background-color: rgba(0,0,0,0.2);
   cursor: pointer;
   padding: 1em;
+  border-style: solid;
+}
+
+.productCardButtonContainer {
+  display: flex;
+}
+
+.productCardIcon {
+  margin: 0.25rem;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: black;
+  margin-left: auto;
+}
+
+.productCardIcon:hover {
+  background-color: #1B89FA;
 }
 
 .img {
@@ -30,8 +48,9 @@
 
 @media only screen and (max-width: 700px) {
   .productCardContainer {
-    width: 100%;
-    height: 50vh;
+    width: 80%;
+    height: 25vh;
     margin: 2rem 0;
+    align-self: center;
   }
 }

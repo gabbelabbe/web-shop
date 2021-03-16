@@ -34,9 +34,29 @@ const sameUserSignedIn = (req, res, next) => {
   }
 }
 
+const isLoggedIn = (req, res, next) => {
+  if (req.session.user) {
+    next()
+  } else {
+    res.status(401).send('You are not signed in!')
+  }
+}
+
+const isLoggedOut = (req, res, next) => {
+  if (!req.session.user) {
+    next()
+  } else if (req.session.user) {
+    res.status(200).send('session already exists')
+  } else {
+    res.status(401).send('You are already signed in!')
+  }
+}
+
 module.exports = {
   notFound,
   errHandler,
   isAdmin,
-  sameUserSignedIn
+  sameUserSignedIn,
+  isLoggedIn,
+  isLoggedOut
 }

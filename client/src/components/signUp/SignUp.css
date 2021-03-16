@@ -1,4 +1,4 @@
-.signInForm {
+.signUpForm {
   margin-bottom: auto;
   margin-top: auto;
   align-self: center;
@@ -9,15 +9,16 @@
   border-style: solid;
 }
 
-.signInInput {
-  margin-bottom: 10px;
+.signUpInput {
+  margin-bottom: 20px;
   outline: none;
   border-width: 0 0 2px;
   border-color: #000;
   font-size: 1rem;
+  width: 100%;
 }
 
-.signInInput:focus {
+.signUpInput:focus {
   border-color: #1B89FA;
 }
 

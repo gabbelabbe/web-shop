@@ -8,6 +8,8 @@ const routes = (app) => {
 
   app.post('/user/logout', UserController.signOut)
 
+  app.post('/user/session', Middlewares.isLoggedOut, UserController.createSession)
+
   app.get('/users', Middlewares.isAdmin, UserController.getAllUsers)
 
   app.delete('/user', UserController.deleteUser)

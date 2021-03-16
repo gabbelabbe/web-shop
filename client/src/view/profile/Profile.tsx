@@ -1,14 +1,12 @@
 import { ProfileButtons } from '../../components/profileButtons/ProfileButtons'
-import { ProfileEditUserInfoForm } from '../../components/profileEditUserInfoForm/ProfileEditUserInfoForm'
+import { ProfileForms } from '../../components/profileForms/ProfileForms'
 import './Profile.css'
 
 export const Profile = () => {
   
   return (
     <div className='profileContainer'>
-      <div className='infoAndFormContainer'>
-        <ProfileEditUserInfoForm />
-      </div>
+      <ProfileForms />
       <ProfileButtons />
     </div>
   )

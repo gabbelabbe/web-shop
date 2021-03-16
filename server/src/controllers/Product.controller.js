@@ -72,18 +72,6 @@ const changeQuantity = async (req, res) => {
   }
 }
 
-const changePrice = async (req, res) => {
-  try {
-    const dbRes = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { price: req.body.price })
-    res.status(200).send(dbRes)
-  } catch (err) {
-    res.status(500).send({
-      msg: 'Error while trying to change quantity.',
-      stack: err
-    })
-  }
-}
-
 const updateProduct = async (req, res) => {
   try {
     const dbRes = await ProductModel.findOneAndUpdate({ _id: req.body._id }, { ...req.body })
@@ -114,7 +102,6 @@ module.exports = {
   getOneProduct,
   deleteProduct,
   changeQuantity,
-  changePrice,
   queryProduct,
   updateProduct
 }

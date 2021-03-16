@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { editUser } from "../../shared/api/apiHandler"
-import Eye from '../../shared/images/visibility-black-18dp.svg'
-import EyeCrossed from '../../shared/images/visibility_off-black-18dp.svg'
-import { UserContext } from "../../shared/provider/UserProvider"
+import { editUser } from "../../../shared/api/apiHandler"
+import Eye from '../../../shared/images/visibility-black-18dp.svg'
+import EyeCrossed from '../../../shared/images/visibility_off-black-18dp.svg'
+import { UserContext } from "../../../shared/provider/UserProvider"
 
 import './ProfileEditUserInfoForm.css'
 
@@ -31,7 +31,7 @@ export const ProfileEditUserInfoForm = () => {
   }, [userInfo])
 
   return (
-    <div className='signInForm'>
+    <div className='editInfoForm'>
       <label htmlFor="un">
         Username
       </label>
@@ -39,7 +39,7 @@ export const ProfileEditUserInfoForm = () => {
         type="text" 
         name="un"
         onChange={event => handleChange({username: event.target.value})} 
-        className='signInInput'
+        className='editInfoInput'
         autoComplete="username"
         value={userInfo.username}
       />
@@ -50,7 +50,7 @@ export const ProfileEditUserInfoForm = () => {
         type="text" 
         name="em"
         onChange={event => handleChange({email: event.target.value})} 
-        className='signInInput'
+        className='editInfoInput'
         autoComplete="email"
         value={userInfo.email}
       />
@@ -61,7 +61,7 @@ export const ProfileEditUserInfoForm = () => {
         type="text" 
         name="ad"
         onChange={event => handleChange({address: event.target.value})} 
-        className='signInInput'
+        className='editInfoInput'
         autoComplete="address"
         value={userInfo.address}
       />
@@ -73,7 +73,7 @@ export const ProfileEditUserInfoForm = () => {
           type={showPwd ? 'text' : "password"}
           name="oldPw"
           onChange={event => handleChange({oldPassword: event.target.value})} 
-          className={showPwd ? 'signInInput showPwd' : 'signInInput hidePwd'}
+          className={showPwd ? 'editInfoInput showPwd' : 'editInfoInput hidePwd'}
           autoComplete="password"
         />
         <img
@@ -91,7 +91,7 @@ export const ProfileEditUserInfoForm = () => {
           type={showPwd ? 'text' : "password"}
           name="newPw"
           onChange={event => handleChange({newPassword: event.target.value})} 
-          className={showPwd ? 'signInInput showPwd' : 'signInInput hidePwd'}
+          className={showPwd ? 'editInfoInput showPwd' : 'signInInput hidePwd'}
           autoComplete="password"
         />
         <img

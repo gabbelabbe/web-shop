@@ -54,36 +54,65 @@ const deleteCart = async (req, res) => {
 
 const updateCartProducts = async (req, res) => {
   try {
-    const cart = await CartModel.findById(req.body._id)
-
-    if (cart) {
-      const itemIndex = cart.products.findIndex(p => p.product == req.body.productID)
-
-      if (itemIndex > -1) {
-        if (req.body.quantity === 0) {
-          cart.products.splice(itemIndex, 1)
-        } else {
-          const productItem = cart.products[itemIndex]
-          productItem.quantity = req.body.quantity
-          cart.products[itemIndex] = productItem
-        }
-      } else {
-        cart.products.push({product: req.body.productID, quantity: req.body.quantity})
-      }
-
-      const dbRes = await cart.save()
-      return res.status(200).send(dbRes)
-    } else {
-      const newCart = await CartModel.create({
-        userID: req.session.user._id,
-        products: [{product: req.body.productID, quantity: req.body.quantity}]
+    const cart = await CartModel.findById(req.session.user.cart._id, 'products')
+      .populate({
+        path: 'products', populate: { path: 'product', select: 'name types price' }
       })
 
-      return res.status(201).send(newCart)
+    const itemIndex = cart.products.findIndex(p => p.product._id.equals(req.body.productID))
+
+    if (itemIndex > -1) {
+      if (req.body.quantity + cart.products[itemIndex].quantity <= 0) {
+        cart.products.splice(itemIndex, 1)
+      } else {
+        const productItem = cart.products[itemIndex]
+        productItem.quantity += req.body.quantity
+        cart.products[itemIndex] = productItem
+      }
+    } else {
+      cart.products.push({product: req.body.productID, quantity: req.body.quantity})
     }
+
+    await cart.save()
+    const serverCart = await CartModel.findById(cart._id, 'products')
+      .populate({
+        path: 'products', populate: { path: 'product', select: 'name types price' }
+      })
+
+    req.session.user.cart = serverCart
+    req.session.save((err) => {
+      if (err)
+        console.error(err)
+    })
+    return res.status(200).send(serverCart)
   } catch (err) {
     res.status(500).send({
       msg: 'Error while trying to update cart.',
+      stack: err
+    })
+  }
+}
+
+const clearCart = async (req, res) => {
+  try {
+    const cart = await CartModel.findById(req.session.user.cart._id, 'products')
+      .populate({
+        path: 'products', populate: { path: 'product', select: 'name types price' }
+      })
+
+    cart.products = []
+
+    await cart.save()
+
+    req.session.user.cart = cart
+    req.session.save((err) => {
+      if (err)
+        console.error(err)
+    })
+    return res.status(200).send(cart)
+  } catch (err) {
+    res.status(500).send({
+      msg: 'Error while trying to clear cart.',
       stack: err
     })
   }
@@ -94,5 +123,6 @@ module.exports = {
   deleteCart,
   getAllCarts,
   getCart,
-  updateCartProducts
+  updateCartProducts,
+  clearCart
 }

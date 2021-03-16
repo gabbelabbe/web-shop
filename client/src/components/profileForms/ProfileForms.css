@@ -1,0 +1,5 @@
+.profileFormsContainer {
+  display: flex;
+  margin: 5rem;
+  justify-content: center;
+}

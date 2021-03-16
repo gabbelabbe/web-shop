@@ -18,7 +18,11 @@ const createUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     user.password = await bcrypt.hash(user.password, salt)
     const dbRes = await user.save()
-    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType cart').populate('cart', 'products').execPopulate()
+    const serverUser = await UserModel.findById(dbRes._id, 'username email address userType cart')
+      .populate({
+        path: 'cart', select: 'products', populate: { path: 'products', populate: { path: 'product', select: 'name types price' }}
+      })
+      
     req.session.user = serverUser
     req.session.save((err) => {
       if (err)
@@ -50,7 +54,6 @@ const getAllUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const dbRes = await UserModel.findByIdAndDelete((req.session.user ? req.session.user._id : req.body._id))
-    console.log(dbRes)
     const cartRes = await CartModel.findByIdAndDelete(dbRes.cart)
     req.session.user = null
     req.session.save((err) => {
@@ -83,7 +86,10 @@ const updateUser = async (req, res) => {
       newUserInfo.password = newPwd
       
       await UserModel.updateOne({ _id: req.body._id }, { ...newUserInfo })
-      const signedInUser = await (await UserModel.findById(newUserInfo._id, 'username email address userType cart')).populate('cart', 'products').execPopulate()
+      const signedInUser = await (await UserModel.findById(newUserInfo._id, 'username email address userType cart'))
+        .populate({
+          path: 'cart', select: 'products', populate: { path: 'products', populate: { path: 'product', select: 'name types price' }}
+        })
 
       req.session.user = signedInUser
       req.session.save((err) => {
@@ -108,7 +114,11 @@ const loginUser = async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
 
     if (validPassword) {
-      const signedInUser = await (await UserModel.findById(user._id, 'username email address userType cart')).populate('cart', 'products').execPopulate()
+      const signedInUser = await UserModel.findById(user._id, 'username email address userType cart')
+        .populate({
+          path: 'cart', select: 'products', populate: { path: 'products', populate: { path: 'product', select: 'name types price' }}
+        })
+
       req.session.user = signedInUser
       req.session.save((err) => {
         if (err)
@@ -154,6 +164,22 @@ const signOut = async (req, res) => {
   }
 }
 
+const createSession = async (req, res) => {
+  try {
+    req.session.user = req.body
+    req.session.save((err) => {
+      if (err)
+        console.error(err)
+    })
+    res.status(200).send('session created')
+  } catch (err) {
+    res.status(500).send({
+      msg: 'Error while trying to create session.',
+      stack: err
+    })
+  }
+}
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -161,5 +187,6 @@ module.exports = {
   updateUser,
   loginUser,
   adminUpdateUser,
-  signOut
+  signOut,
+  createSession
 }

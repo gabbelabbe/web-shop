@@ -2,9 +2,9 @@ import { useContext } from 'react'
 import { Link, useHistory } from "react-router-dom"
 import RoutingPath from "../../../routes/RoutingPath"
 import HomeSVG from '../../../shared/images/home-white-18dp.svg'
-import CartSVG from '../../../shared/images/shopping_cart-white-18dp.svg'
 import './DesktopHeader.css'
 import { UserContext } from '../../../shared/provider/UserProvider'
+import { CartIcon } from '../cartIcon/CartIcon'
 
 export const DesktopHeader = () => {
   const history = useHistory()
@@ -19,7 +19,7 @@ export const DesktopHeader = () => {
       <Link to={RoutingPath.guidelinesView}>Guidelines</Link>
       {authUser && authUser.userType === 'admin' ? <Link to={RoutingPath.adminView}>Admin</Link> : null}
       {authUser ? <Link to={RoutingPath.profileView}>{authUser.username}</Link> : <Link to={RoutingPath.signInView}>Sign In</Link>}
-      <img src={CartSVG} alt='Cart Button' onClick={() => history.push(RoutingPath.cartView)} className='svgs' />
+      <CartIcon />
     </header>
   )
 }

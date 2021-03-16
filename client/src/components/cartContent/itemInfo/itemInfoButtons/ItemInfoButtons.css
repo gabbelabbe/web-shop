@@ -1,0 +1,26 @@
+.itemInfoButtonsContainer {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.itemInfoButtonsContainer p {
+  margin-left: unset;
+}
+
+.itemInfoButton {
+  margin: 0.25rem;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: black;
+}
+
+.delete:hover {
+  background-color: #AD2117;
+}
+
+.add:hover {
+  background-color: #1B89FA;
+}

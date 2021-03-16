@@ -7,11 +7,13 @@ import Eye from '../../shared/images/visibility-black-18dp.svg'
 import EyeCrossed from '../../shared/images/visibility_off-black-18dp.svg'
 import './SignIn.css'
 import { signIn } from '../../shared/api/apiHandler'
+import { CartContext } from '../../shared/provider/CartProvider'
 
 export const SignIn = () => {
   const history = useHistory()
   const [loginCredentials, setLoginCredentials] = useState<iloginCredentials>({username: '', password: ''})
   const [, setAuthUser] = useContext(UserContext)
+  const [, setCart] = useContext(CartContext)
   const [disabled, setDisabled] = useState(true)
   const [showPwd, setShowPwd] = useState(false)
 
@@ -20,7 +22,9 @@ export const SignIn = () => {
       const response = await signIn(loginCredentials.username, loginCredentials.password)
       if (response && response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
+        localStorage.setItem('cart', JSON.stringify(response.data.cart))
         setAuthUser(response.data)
+        setCart(response.data.cart)
         history.push(RoutingPath.homeView)
       }
     }

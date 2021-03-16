@@ -70,3 +70,21 @@ export const editUser = (userInfo: any) => {
     .then(res => res)
     .catch(err => console.error(err))
 }
+
+export const updateCart = (cartInfo: any) => {
+  return Axios.put(baseUrl + 'cart/update', {...cartInfo})
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const createSession = (userInfo: any) => {
+  return Axios.post(baseUrl + 'user/session', {...userInfo})
+    .then(res => res)
+    .catch(err => console.error(err))
+}
+
+export const updateQuantity = (_id: string, change: number) => {
+  return Axios.put(baseUrl + 'product/quantity', { _id, change})
+    .then(res => res)
+    .catch(err => console.error(err))
+}

@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom"
 import RoutingPath from "../../../routes/RoutingPath"
 import { UserContext } from "../../../shared/provider/UserProvider"
 import HomeSVG from '../../../shared/images/home-white-18dp.svg'
-import CartSVG from '../../../shared/images/shopping_cart-white-18dp.svg'
 import HamSVG from '../../../shared/images/menu-white-18dp.svg'
 import './MobileHeader.css'
+import { CartIcon } from "../cartIcon/CartIcon"
 
 export const MobileHeader = () => {
   const history = useHistory()
@@ -28,7 +28,7 @@ export const MobileHeader = () => {
         <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.guidelinesView)}>Guidelines</span>
         {authUser ? <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.profileView)}>{authUser.username}</span> : <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.signInView)}>Sign In</span>}
         {authUser && authUser.userType === 'admin' ? <span className='link' onClick={() => closeMenuOnNewUrl(RoutingPath.adminView)}>Admin</span> : null}
-        <img src={CartSVG} alt='Cart Button' onClick={() => closeMenuOnNewUrl(RoutingPath.cartView)} className='svgs' />
+        <CartIcon />
       </div>
     </header>
   )

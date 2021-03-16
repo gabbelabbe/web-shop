@@ -7,11 +7,13 @@ import Eye from '../../shared/images/visibility-black-18dp.svg'
 import EyeCrossed from '../../shared/images/visibility_off-black-18dp.svg'
 import './SignUp.css'
 import { signUp } from '../../shared/api/apiHandler'
+import { CartContext } from '../../shared/provider/CartProvider'
 
 export const SignUp = () => {
   const history = useHistory()
   const [loginCredentials, setLoginCredentials] = useState<iloginCredentials>({username: '', email: '', password: ''})
   const [, setAuthUser] = useContext(UserContext)
+  const [, setCart] = useContext(CartContext)
   const [disabled, setDisabled] = useState(true)
   const [showPwd, setShowPwd] = useState(false)
 
@@ -20,7 +22,9 @@ export const SignUp = () => {
       const response = await signUp(loginCredentials.email, loginCredentials.username, loginCredentials.password)
       if (response && response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
+        localStorage.setItem('cart', JSON.stringify(response.data.cart))
         setAuthUser(response.data)
+        setCart(response.data.cart)
         history.push(RoutingPath.homeView)
       }
     }
@@ -35,7 +39,7 @@ export const SignUp = () => {
   }, [loginCredentials])
 
   return (
-    <div className='signInForm'>
+    <div className='signUpForm'>
       <label htmlFor="u">
         Username
       </label>
@@ -43,7 +47,7 @@ export const SignUp = () => {
         type="text" 
         name="u"
         onChange={event => handleChange({username: event.target.value})} 
-        className='signInInput'
+        className='signUpInput'
         value={loginCredentials.username}
         autoComplete="username"
       />
@@ -54,7 +58,7 @@ export const SignUp = () => {
         type="email" 
         name="e"
         onChange={event => handleChange({email: event.target.value})} 
-        className='signInInput'
+        className='signUpInput'
         value={loginCredentials.email}
         autoComplete="email"
       />
@@ -66,7 +70,7 @@ export const SignUp = () => {
           type={showPwd ? 'text' : "password"}
           name="pw"
           onChange={event => handleChange({password: event.target.value})} 
-          className={showPwd ? 'signInInput showPwd' : 'signInInput hidePwd'}
+          className={showPwd ? 'signUpInput showPwd' : 'signUpInput hidePwd'}
           autoComplete="password"
         />
         <img

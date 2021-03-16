@@ -11,9 +11,7 @@ const routes = (app) => {
   app.post('/product', Middlewares.isAdmin, ProductController.createProduct)
   
   app.put('/product/quantity', ProductController.changeQuantity)
-  
-  app.put('/product/price', ProductController.changePrice)
-  
+    
   app.put('/product', Middlewares.isAdmin, ProductController.updateProduct)
   
   app.delete('/product', Middlewares.isAdmin, ProductController.deleteProduct)

@@ -9,15 +9,16 @@ import RoutingPaths from './RoutingPath'
 import { UserContext } from '../shared/provider/UserProvider'
 import { Profile } from '../view/profile/Profile'
 import { Products } from '../view/Products'
-import { Cart } from '../view/Cart'
-import { Product } from '../view/Product'
+import { Cart } from '../view/cartContainer/Cart'
 import { ProductsContext } from '../shared/provider/ProductsProvider'
-import { getAllProducts } from "../shared/api/apiHandler"
+import { createSession, getAllProducts } from "../shared/api/apiHandler"
 import { Admin } from '../view/admin/Admin'
+import { CartContext } from '../shared/provider/CartProvider'
 
 const Routes = () => {
   const [authUser, setAuthUser] = useContext(UserContext)
-  const [products, setProducts] = useContext(ProductsContext)
+  const [, setProducts] = useContext(ProductsContext)
+  const [cart, setCart] = useContext(CartContext)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,14 +27,29 @@ const Routes = () => {
         setProducts(temp.data)
     }
 
-    if (!products.length)
-      fetchProducts()
+    fetchProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authUser])
+  }, [authUser, cart])
 
   useEffect(() => {
+    const initSession = async () => {
+      const user = JSON.parse(localStorage.getItem('user')!)
+      const res = await createSession(user)
+      if (res && res.status === 200) {
+        setAuthUser(user)
+        setCart(user.cart)
+      }
+    }
+
     if(!authUser && localStorage.getItem('user')) {
-      setAuthUser(JSON.parse(localStorage.getItem('user')!))
+      initSession()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if(!cart && localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')!))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -48,7 +64,6 @@ const Routes = () => {
         <Route exact path={RoutingPaths.productView} component={Products} />
         <Route exact path={RoutingPaths.cartView} component={Cart} />
         <Route exact path={RoutingPaths.adminView} component={authUser && authUser.userType === 'admin' ? Admin : Home} />
-        <Route path={RoutingPaths.productView + '/:id'} component={Product} />
         <Route component={Home} />
       </Switch>
       <Footer />

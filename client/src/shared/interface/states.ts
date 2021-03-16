@@ -19,3 +19,13 @@ export interface iProduct {
   quantity?: number,
   _id?: string
 }
+
+export interface iCartProduct {
+  product?: iProduct,
+  quantity?: number
+}
+
+export interface iCart {
+  _id?: string,
+  products?: iCartProduct[]
+}
