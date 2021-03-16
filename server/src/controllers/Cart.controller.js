@@ -1,4 +1,5 @@
 const CartModel = require('../models/Cart.model.js')
+const ProductModel = require('../models/Product.model.js')
 
 const createCart = async (req, res) => {
   const cart = new CartModel({
@@ -54,6 +55,7 @@ const deleteCart = async (req, res) => {
 
 const updateCartProducts = async (req, res) => {
   try {
+    const product = await ProductModel.findById(req.body.productID)
     const cart = await CartModel.findById(req.session.user.cart._id, 'products')
       .populate({
         path: 'products', populate: { path: 'product', select: 'name types price' }
@@ -72,8 +74,9 @@ const updateCartProducts = async (req, res) => {
     } else {
       cart.products.push({product: req.body.productID, quantity: req.body.quantity})
     }
-
     await cart.save()
+    product.quantity -= req.body.quantity
+    await product.save()
     const serverCart = await CartModel.findById(cart._id, 'products')
       .populate({
         path: 'products', populate: { path: 'product', select: 'name types price' }

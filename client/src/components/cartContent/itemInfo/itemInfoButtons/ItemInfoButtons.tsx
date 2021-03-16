@@ -14,19 +14,19 @@ export const ItemInfoButtons = ({ product }: { product: iCartProduct }) => {
 
 
   const handleEditCart = async (quantity: number) => {
-    const productRes = await updateQuantity(product.product?._id!, -quantity)
-
-    if (productRes && productRes.status === 200) {
-      if (authUser) {
-        // If user is logged in
-        const res = await updateCart({quantity: quantity, productID: product.product?._id})
-        if (res && res.status === 200) {
-          localStorage.setItem('cart', JSON.stringify(res.data))
-          localStorage.setItem('user', JSON.stringify({...authUser, cart: {...res.data}}))
-          setCart(res.data)
-          setAuthUser({...authUser, cart: {...res.data}})
-        }
-      } else {
+    if (authUser) {
+      // If user is logged in
+      const res = await updateCart({quantity: quantity, productID: product.product?._id})
+      if (res && res.status === 200) {
+        localStorage.setItem('cart', JSON.stringify(res.data))
+        localStorage.setItem('user', JSON.stringify({...authUser, cart: {...res.data}}))
+        setCart(res.data)
+        setAuthUser({...authUser, cart: {...res.data}})
+      }
+    } else {
+      const productRes = await updateQuantity(product.product?._id!, -quantity)
+  
+      if (productRes && productRes.status === 200) {
         // if user is logged out
         const temp = {...cart}
         if (temp.products) {

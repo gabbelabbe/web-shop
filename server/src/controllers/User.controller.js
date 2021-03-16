@@ -1,5 +1,6 @@
 const UserModel = require('../models/User.model.js')
 const CartModel = require('../models/Cart.model.js')
+const ProductModel = require('../models/Product.model.js')
 const bcrypt = require('bcryptjs')
 
 const createUser = async (req, res) => {
@@ -55,6 +56,11 @@ const deleteUser = async (req, res) => {
   try {
     const dbRes = await UserModel.findByIdAndDelete((req.session.user ? req.session.user._id : req.body._id))
     const cartRes = await CartModel.findByIdAndDelete(dbRes.cart)
+    cartRes.products.forEach(async p => {
+      const product = await ProductModel.findById(p.product._id)
+      product.quantity += p.quantity
+      product.save()
+    })
     req.session.user = null
     req.session.save((err) => {
       if (err)
